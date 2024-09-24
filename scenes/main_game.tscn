@@ -1,0 +1,181 @@
+[gd_scene load_steps=3 format=3 uid="uid://d80v70kl8ijn"]
+
+[ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
+[ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/ButtonThemes.tres" id="2_pbr4b"]
+
+[node name="MainGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ot4l6")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.383259, 0, 1)
+
+[node name="RightSide" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 628.0
+offset_right = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="RightSide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -147.0
+offset_right = 189.5
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_pbr4b")
+text = "Lets get some coins "
+
+[node name="CoinLabel" type="Label" parent="RightSide"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -217.5
+offset_top = 22.0
+offset_right = 217.5
+offset_bottom = 136.0
+grow_horizontal = 2
+text = "Coins:0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="RightSide"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -243.5
+offset_top = -200.0
+offset_right = 243.5
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="MoreClick" type="Button" parent="RightSide/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+theme = ExtResource("2_pbr4b")
+text = "MORE CLICK"
+autowrap_mode = 2
+
+[node name="AutoClick" type="Button" parent="RightSide/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+theme = ExtResource("2_pbr4b")
+toggle_mode = true
+text = "Auto Click: Off!
+"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+theme = ExtResource("2_pbr4b")
+text = "Repair
+Turret!"
+
+[node name="LabelContainer" type="GridContainer" parent="RightSide"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 354.0
+offset_right = 474.0
+offset_bottom = 462.0
+theme_override_constants/h_separation = 13
+columns = 3
+
+[node name="MultiplierPanel" type="Panel" parent="RightSide/LabelContainer"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+
+[node name="MultiplierCount" type="Label" parent="RightSide/LabelContainer/MultiplierPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1.00 x"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 1
+
+[node name="TimePanel" type="Panel" parent="RightSide/LabelContainer"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+
+[node name="TimeIntervalLabel" type="Label" parent="RightSide/LabelContainer/TimePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Clicking: 1.00 s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="RightSide/LabelContainer"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RightSide/LabelContainer/Panel3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Something"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AutoClickUpdate" type="Button" parent="RightSide"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 560.0
+offset_right = 305.0
+offset_bottom = 627.0
+theme = ExtResource("2_pbr4b")
+text = "Shorter Click"
+autowrap_mode = 2
+
+[node name="AutoClickTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="pressed" from="RightSide/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="RightSide/GridContainer/MoreClick" to="." method="_on_more_click_pressed"]
+[connection signal="pressed" from="RightSide/GridContainer/AutoClick" to="." method="_on_auto_click_pressed"]
+[connection signal="pressed" from="RightSide/AutoClickUpdate" to="." method="_on_auto_click_update_pressed"]
+[connection signal="timeout" from="AutoClickTimer" to="." method="_on_auto_click_timeout"]

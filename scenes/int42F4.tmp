@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl4h68w8aypit"]
+
+[ext_resource type="VideoStream" path="res://resources/goofyAhHeat.ogv" id="1_l1su7"]
+[ext_resource type="Script" path="res://scenes/intro_scene.gd" id="1_oowg5"]
+
+[node name="IntroScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oowg5")
+
+[node name="HeatIntro" type="VideoStreamPlayer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2688.0
+offset_bottom = 1512.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+stream = ExtResource("1_l1su7")
+autoplay = true
+buffering_msec = 10

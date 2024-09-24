@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://d80v70kl8ijn"]
+
+[ext_resource type="Script" path="res://main_game.gd" id="1_e7raq"]
+
+[node name="MainGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e7raq")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.383259, 0, 1)
+
+[node name="RightSide" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 721.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="RightSide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -63.0
+offset_right = 189.5
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lets get some coins "
+
+[node name="CoinLabel" type="Label" parent="RightSide"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -217.5
+offset_top = 106.0
+offset_right = 217.5
+offset_bottom = 220.0
+grow_horizontal = 2
+text = "Coins:0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="RightSide"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -191.5
+offset_top = -130.0
+offset_right = 191.5
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="MoreClick" type="Button" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(125, 100)
+layout_mode = 2
+text = "MORE CLICK"
+
+[node name="AutoClick" type="Button" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(125, 100)
+layout_mode = 2
+text = "AUTO CLICK"
+
+[node name="Button" type="Button" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(125, 100)
+layout_mode = 2
+text = "Something
+for now"
+
+[node name="AutoClick" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="pressed" from="RightSide/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="AutoClick" to="." method="_on_auto_click_timeout"]
