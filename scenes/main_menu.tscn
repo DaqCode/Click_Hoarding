@@ -1,4 +1,196 @@
-[gd_scene format=3 uid="uid://cm4lv8xqk5wep"]
+[gd_scene load_steps=14 format=3 uid="uid://cm4lv8xqk5wep"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_0kl1v"]
+[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/GamestationDisplay-zexG.otf" id="1_yaqr3"]
+[ext_resource type="Theme" uid="uid://c4vqxejpebeih" path="res://themes/UIButtonTheme.tres" id="2_4fkyw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr30s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.282353, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.752941, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_color = Color(0.658824, 0, 0.176471, 1)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg5a6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.498039)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33mwg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.705882)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqdfd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.498039)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3eio1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.443137, 0.443137, 0.443137, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="Theme" id="Theme_1fhrm"]
+Button/colors/font_color = Color(2.40654e-08, 1.68458e-07, 0.361135, 1)
+Button/colors/font_focus_color = Color(0, 0.00848744, 0.152157, 1)
+Button/colors/font_hover_color = Color(0.00285935, 0.136585, 0.643023, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 75
+Button/fonts/font = ExtResource("1_yaqr3")
+Button/styles/disabled = SubResource("StyleBoxFlat_sr30s")
+Button/styles/focus = SubResource("StyleBoxFlat_yg5a6")
+Button/styles/hover = SubResource("StyleBoxFlat_33mwg")
+Button/styles/normal = SubResource("StyleBoxFlat_vqdfd")
+Button/styles/pressed = SubResource("StyleBoxFlat_3eio1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7g16"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.532815, 0.264062, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h22vy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.458824, 0.0117647, 0, 0.509804)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ypcc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.603922, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 5
+
+[sub_resource type="Theme" id="Theme_jen1e"]
+Button/colors/font_color = Color(0.433482, 8.78386e-07, 2.64719e-07, 1)
+Button/colors/font_focus_color = Color(0, 0.00848744, 0.152157, 1)
+Button/colors/font_hover_color = Color(0.174531, 0, 0.0180693, 1)
+Button/colors/font_hover_pressed_color = Color(1, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 75
+Button/fonts/font = ExtResource("1_yaqr3")
+Button/styles/disabled = SubResource("StyleBoxFlat_a7g16")
+Button/styles/focus = SubResource("StyleBoxFlat_h22vy")
+Button/styles/hover = SubResource("StyleBoxFlat_h22vy")
+Button/styles/normal = SubResource("StyleBoxFlat_8ypcc")
+Button/styles/pressed = SubResource("StyleBoxFlat_h22vy")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +199,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0kl1v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -16,3 +209,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.266667, 0, 1)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 30.0
+offset_top = -248.0
+offset_right = 430.0
+offset_bottom = 262.0
+grow_vertical = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 30
+
+[node name="PlayButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+theme = SubResource("Theme_1fhrm")
+text = "PLAY!"
+
+[node name="CreditButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+theme = ExtResource("2_4fkyw")
+text = "CREDITS"
+
+[node name="QuitButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+theme = SubResource("Theme_jen1e")
+text = "QUIT..."
+
+[connection signal="pressed" from="GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="GridContainer/CreditButton" to="." method="_on_credit_button_pressed"]
+[connection signal="pressed" from="GridContainer/QuitButton" to="." method="_on_quit_button_pressed"]
