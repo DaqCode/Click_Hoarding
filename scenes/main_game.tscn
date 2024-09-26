@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=4 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/ButtonThemes.tres" id="2_pbr4b"]
+[ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/labelTheme.tres" id="3_303a6"]
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ot4l6")
@@ -157,7 +160,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Something"
+theme = ExtResource("3_303a6")
+text = "You Need a Lot"
 horizontal_alignment = 1
 vertical_alignment = 1
 

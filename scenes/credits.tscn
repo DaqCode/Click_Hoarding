@@ -1,4 +1,16 @@
-[gd_scene format=3 uid="uid://b1mlbue56gjoj"]
+[gd_scene load_steps=6 format=3 uid="uid://b1mlbue56gjoj"]
+
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_0n6qa"]
+[ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/ButtonThemes.tres" id="1_my0n3"]
+[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/GamestationDisplay-zexG.otf" id="2_42f7e"]
+
+[sub_resource type="Theme" id="Theme_nijh8"]
+default_font = ExtResource("2_42f7e")
+default_font_size = 31
+
+[sub_resource type="Theme" id="Theme_mi8la"]
+default_font = ExtResource("2_42f7e")
+default_font_size = 75
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -7,3 +19,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0n6qa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.317647, 0.698039, 0.317647, 1)
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = -161.0
+offset_right = 260.0
+offset_bottom = -72.0
+grow_vertical = 0
+theme = ExtResource("1_my0n3")
+text = "Back To Main Menu"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -641.0
+offset_top = -310.0
+offset_right = -13.0
+offset_bottom = 309.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = SubResource("Theme_nijh8")
+theme_override_colors/font_outline_color = Color(1, 0.585541, 0.680374, 1)
+theme_override_colors/font_shadow_color = Color(0.164706, 0.858824, 0, 1)
+text = "Lead Programmer & Developer:
+Daq_Vid
+
+Game Art & Animations: 
+Decent900
+
+This took quite the long time to be able to complete, and with just a small team of myself and another, we're glad of the progross.
+
+Hopefully this game does nearly as better as some of  the other games, as this is much more of a full scale project that was completed.
+
+Live  up to your expectations! Thanks for checking it out!"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 33.0
+offset_right = 361.0
+offset_bottom = 133.0
+theme = SubResource("Theme_mi8la")
+theme_override_colors/font_color = Color(0.939255, 1, 0.932464, 1)
+theme_override_colors/font_shadow_color = Color(0, 1, 0, 1)
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
