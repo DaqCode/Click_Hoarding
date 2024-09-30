@@ -101,19 +101,24 @@ func _on_auto_click_update_pressed() -> void:
 
 		autoClickUpgrade.text = "Upgrade: %s coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = false
-		print(autoClickLevel)
+
+		# Decrease the interval for the autoclicker based on autoClickLevel
+		autoclick.wait_time = max(0.01, 0.75 / autoClickLevel)  # Minimum time interval of 0.1 seconds
+		print("AutoClick Level: %d, Interval: %.2f seconds" % [autoClickLevel, autoclick.wait_time])
+
+# When time expires, repeat to _on_auto_click_pressed
+func _on_auto_click_timeout() -> void:
+	_on_button_pressed()
+
+	# Restart the autoclicker with the updated interval
+	autoclick.start()
+
 
 # When autoclicker is pressed
 func _on_auto_click_pressed() -> void:
 	autoButtonActivate = not autoButtonActivate
 	autoButtonUse()
 
-# When time expires, repeat to _on_auto_click_pressed
-func _on_auto_click_timeout() -> void:
-	_on_button_pressed()
-	#Need a certain formula for timer being shorter every upgrade.
-	autoclick.start(0.25)
-	#autoclick.start(pow(1.0, -1 * autoClickLevel))
 
 # Should update every time.
 func _process(_delta):
