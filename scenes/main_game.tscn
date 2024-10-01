@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=7 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/ButtonThemes.tres" id="2_pbr4b"]
 [ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/labelTheme.tres" id="3_303a6"]
+[ext_resource type="Texture2D" uid="uid://dr6ngagif23me" path="res://images/coinHover.png" id="3_cpofu"]
+[ext_resource type="Texture2D" uid="uid://cvl1fwy8adqvt" path="res://images/clickUpgrade.png" id="4_yj7ng"]
+[ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
@@ -49,7 +52,12 @@ offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_pbr4b")
+theme_override_constants/icon_max_width = 75
+theme_override_icons/icon = ExtResource("3_cpofu")
 text = "Lets get some coins "
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
 
 [node name="CoinLabel" type="Label" parent="RightSide"]
 layout_mode = 1
@@ -84,10 +92,13 @@ columns = 3
 
 [node name="MoreClick" type="Button" parent="RightSide/GridContainer"]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 theme = ExtResource("2_pbr4b")
+theme_override_constants/icon_max_width = 45
 text = "MORE CLICK"
+icon = ExtResource("4_yj7ng")
 autowrap_mode = 2
 
 [node name="AutoClick" type="Button" parent="RightSide/GridContainer"]
@@ -95,9 +106,11 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 theme = ExtResource("2_pbr4b")
+theme_override_constants/icon_max_width = 45
 toggle_mode = true
 text = "Auto Click: Off!
 "
+icon = ExtResource("5_l1c0y")
 autowrap_mode = 2
 
 [node name="Button" type="Button" parent="RightSide/GridContainer"]
