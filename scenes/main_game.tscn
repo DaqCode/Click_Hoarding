@@ -1,39 +1,175 @@
-[gd_scene load_steps=10 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=21 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
-[ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/ButtonThemes.tres" id="2_pbr4b"]
-[ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/labelTheme.tres" id="3_303a6"]
+[ext_resource type="Texture2D" uid="uid://d0dxbhe0twtw8" path="res://images/heat_button_start_heat_press_image.png" id="2_meut3"]
+[ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/themes/ButtonThemes.tres" id="2_pbr4b"]
+[ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/themes/labelTheme.tres" id="3_303a6"]
 [ext_resource type="Texture2D" uid="uid://dr6ngagif23me" path="res://images/coinHover.png" id="3_cpofu"]
 [ext_resource type="Texture2D" uid="uid://cvl1fwy8adqvt" path="res://images/clickUpgrade.png" id="4_yj7ng"]
 [ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
-[ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/progressTheme.tres" id="7_2lu25"]
+[ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/themes/progressTheme.tres" id="7_2lu25"]
+[ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
 [ext_resource type="AudioStream" uid="uid://cr55wvbgces31" path="res://resources/sfx/buttonClick.mp3" id="9_4u5sl"]
+[ext_resource type="AudioStream" uid="uid://b3gfxje8gjvc" path="res://resources/music/music1.mp3" id="12_mqcs4"]
+[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phgnv"]
+bg_color = Color(0.227474, 0.620451, 0.252133, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.774282, 0.995867, 0.770159, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 7
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr30s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.44895, 5.47487e-07, 1.44392e-07, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.752941, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_color = Color(0.658824, 0, 0.176471, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyv83"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.835534, 0.585627, 5.77569e-07, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.519271, 0.109343, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y46pu"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.963451, 0.677192, 2.31028e-06, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.519271, 0.109343, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjfp6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.768091, 0.392787, 0.133025, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.360767, 0.16503, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+shadow_size = 1
+
+[sub_resource type="Theme" id="Theme_ifwe7"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(1, 0.0588235, 0.0823529, 1)
+Button/colors/font_focus_color = Color(7.21961e-08, 2.88785e-07, 0.385399, 1)
+Button/colors/font_hover_color = Color(0.477198, 0.170204, 0.30198, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(0.92549, 0.819608, 0.67451, 1)
+Button/colors/icon_hover_pressed_color = Color(0.755439, 0.599795, 0.375999, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(0.723832, 0.570798, 0.349827, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 38
+Button/fonts/font = ExtResource("13_mn0kx")
+Button/styles/disabled = SubResource("StyleBoxFlat_sr30s")
+Button/styles/hover = SubResource("StyleBoxFlat_dyv83")
+Button/styles/normal = SubResource("StyleBoxFlat_y46pu")
+Button/styles/pressed = SubResource("StyleBoxFlat_gjfp6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61wkl"]
+bg_color = Color(0.427451, 0.819608, 1, 0.878431)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.91105, 0.582503, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(1, 0.766111, 0.797369, 0.211765)
+shadow_size = 3
+anti_aliasing = false
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 3.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ot4l6")
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_meut3")
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.995
-offset_top = -7.0
 offset_right = 768.0
-offset_bottom = 436.24
+offset_bottom = 443.24
 scale = Vector2(0.6, 0.6)
 stream = ExtResource("2_ci6ye")
 autoplay = true
-loop = true
 
 [node name="RightSide" type="Control" parent="."]
 layout_mode = 1
@@ -61,7 +197,7 @@ grow_vertical = 2
 theme = ExtResource("2_pbr4b")
 theme_override_constants/icon_max_width = 75
 theme_override_icons/icon = ExtResource("3_cpofu")
-text = "Lets get some coins "
+text = "Click to get coins!"
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
@@ -77,10 +213,10 @@ offset_right = 192.0
 offset_bottom = 161.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(5.58317e-06, 0.77287, 0.972408, 1)
+theme_override_colors/font_shadow_color = Color(0.481391, 0.856779, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 48
 text = "Coins:0"
 horizontal_alignment = 1
@@ -109,6 +245,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 theme = ExtResource("2_pbr4b")
+theme_override_constants/h_separation = -1
 theme_override_constants/icon_max_width = 45
 text = "MORE CLICK"
 icon = ExtResource("4_yj7ng")
@@ -134,11 +271,12 @@ text = "Repair
 Turret!"
 
 [node name="LabelContainer" type="GridContainer" parent="RightSide"]
+texture_filter = 1
 layout_mode = 0
 offset_left = -4.0
 offset_top = 354.0
 offset_right = 474.0
-offset_bottom = 462.0
+offset_bottom = 429.0
 theme_override_constants/h_separation = 13
 columns = 3
 
@@ -154,6 +292,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0631479, 0.176623, 0.497035, 1)
+theme_override_constants/line_spacing = -10
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("8_i4027")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_phgnv")
 text = "1.00 x"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -171,9 +319,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0631479, 0.176623, 0.497035, 1)
+theme_override_constants/line_spacing = -10
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("8_i4027")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_phgnv")
 text = "Clicking: 1.00 s"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Panel3" type="Panel" parent="RightSide/LabelContainer"]
 custom_minimum_size = Vector2(150, 75)
@@ -189,9 +348,20 @@ offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_303a6")
-text = "You Need a Lot"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0631479, 0.176623, 0.497035, 1)
+theme_override_constants/line_spacing = -10
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("8_i4027")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_phgnv")
+text = "Required: 1B"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="AutoClickUpdate" type="Button" parent="RightSide"]
 layout_mode = 0
@@ -214,12 +384,75 @@ offset_right = 462.0
 offset_bottom = 41.0
 grow_horizontal = 2
 theme = ExtResource("7_2lu25")
-max_value = 1.0
+value = 27.0
+rounded = true
+
+[node name="RandomLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 172.0
+offset_top = 275.0
+offset_right = 336.0
+offset_bottom = 334.0
+pivot_offset = Vector2(82, 30)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.389488, 0.580581, 0.999993, 1)
+theme_override_colors/font_outline_color = Color(0.100639, 0.425778, 0.369547, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("8_i4027")
+theme_override_font_sizes/font_size = 48
+text = "+1 Coin!"
+
+[node name="Pause" type="Button" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 75.0
+offset_bottom = 75.0
+theme = SubResource("Theme_ifwe7")
+theme_override_constants/h_separation = 2
+text = "P"
+
+[node name="PausePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -393.5
+offset_top = -214.5
+offset_right = 393.5
+offset_bottom = 214.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_61wkl")
+
+[node name="Resume" type="Button" parent="PausePanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -377.0
+offset_top = -109.5
+offset_right = -194.0
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_pbr4b")
+theme_override_font_sizes/font_size = 48
+text = "Resume"
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="AutoClickTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
+wait_time = 1.5
 
 [node name="BlinkTimer" type="Timer" parent="Timers"]
 
@@ -229,9 +462,18 @@ wait_time = 0.5
 stream = ExtResource("9_4u5sl")
 volume_db = -18.0
 
+[node name="Music" type="Node" parent="."]
+
+[node name="Music1" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("12_mqcs4")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="pressed" from="RightSide/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="RightSide/GridContainer/MoreClick" to="." method="_on_more_click_pressed"]
 [connection signal="pressed" from="RightSide/GridContainer/AutoClick" to="." method="_on_auto_click_pressed"]
 [connection signal="pressed" from="RightSide/AutoClickUpdate" to="." method="_on_auto_click_update_pressed"]
+[connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="PausePanel/Resume" to="." method="_on_resume_pressed"]
 [connection signal="timeout" from="Timers/AutoClickTimer" to="." method="_on_auto_click_timeout"]
-[connection signal="timeout" from="Timers/BlinkTimer" to="." method="_on_blink_timer_timeout"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cm4lv8xqk5wep"]
+[gd_scene load_steps=16 format=3 uid="uid://cm4lv8xqk5wep"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_0kl1v"]
-[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/GamestationDisplay-zexG.otf" id="1_yaqr3"]
+[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="1_yaqr3"]
 [ext_resource type="VideoStream" path="res://resources/HeatBoy_output.ogv" id="2_0v4ov"]
-[ext_resource type="Theme" uid="uid://c4vqxejpebeih" path="res://themes/UIButtonTheme.tres" id="2_4fkyw"]
+[ext_resource type="Theme" uid="uid://c4vqxejpebeih" path="res://themes/themes/UIButtonTheme.tres" id="2_4fkyw"]
+[ext_resource type="AudioStream" uid="uid://uemvjp15dvu6" path="res://resources/music/mobile-casual-video-game-music-158301.mp3" id="5_aen6u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr30s"]
 content_margin_left = 4.0
@@ -272,6 +273,11 @@ theme_override_font_sizes/font_size = 90
 text = "Click Hoarding"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_aen6u")
+volume_db = -8.0
+autoplay = true
 
 [connection signal="pressed" from="GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="GridContainer/CreditButton" to="." method="_on_credit_button_pressed"]

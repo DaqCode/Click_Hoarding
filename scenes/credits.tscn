@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1mlbue56gjoj"]
 
 [ext_resource type="Script" path="res://scripts/credits.gd" id="1_0n6qa"]
-[ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/ButtonThemes.tres" id="1_my0n3"]
-[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/GamestationDisplay-zexG.otf" id="2_42f7e"]
+[ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/themes/ButtonThemes.tres" id="1_my0n3"]
+[ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="2_42f7e"]
 
 [sub_resource type="Theme" id="Theme_nijh8"]
 default_font = ExtResource("2_42f7e")

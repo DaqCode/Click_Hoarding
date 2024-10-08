@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/intro_scene.gd" id="1_oowg5"]
 [ext_resource type="VideoStream" path="res://resources/HeatHeatBoy_output.ogv" id="2_4gr46"]
-[ext_resource type="Theme" uid="uid://c1a13bhjblb2b" path="res://themes/skipButton.tres" id="3_rg8el"]
+[ext_resource type="Theme" uid="uid://c1a13bhjblb2b" path="res://themes/themes/skipButton.tres" id="3_rg8el"]
 
 [node name="IntroScene" type="Control"]
 layout_mode = 3
