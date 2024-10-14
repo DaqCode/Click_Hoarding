@@ -1,13 +1,11 @@
 extends Control
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var idle: AnimationPlayer = $AnimationPlayer2
 
 func _ready() -> void:
-	animation_player.play("opening")
+	idle.play("idle")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print("Opening finished, playing idel")
 	idle.play("idle")
 
 func _on_play_button_pressed() -> void:

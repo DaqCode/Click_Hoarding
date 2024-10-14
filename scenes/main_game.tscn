@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=22 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
 [ext_resource type="AudioStream" uid="uid://cr55wvbgces31" path="res://resources/sfx/buttonClick.mp3" id="9_4u5sl"]
 [ext_resource type="AudioStream" uid="uid://b3gfxje8gjvc" path="res://resources/music/music1.mp3" id="12_mqcs4"]
+[ext_resource type="AudioStream" uid="uid://c0pbnqwdahrlj" path="res://resources/sfx/powerUp (1).mp3" id="13_2n5l2"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phgnv"]
@@ -417,6 +418,7 @@ theme_override_constants/h_separation = 2
 text = "P"
 
 [node name="PausePanel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -456,11 +458,17 @@ wait_time = 1.5
 
 [node name="BlinkTimer" type="Timer" parent="Timers"]
 
+[node name="GoldenClick" type="Timer" parent="Timers"]
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="ButtonClickSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("9_4u5sl")
 volume_db = -18.0
+
+[node name="GoldenClickAppear" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("13_2n5l2")
+volume_db = -15.0
 
 [node name="Music" type="Node" parent="."]
 
@@ -477,3 +485,4 @@ autoplay = true
 [connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="PausePanel/Resume" to="." method="_on_resume_pressed"]
 [connection signal="timeout" from="Timers/AutoClickTimer" to="." method="_on_auto_click_timeout"]
+[connection signal="timeout" from="Timers/GoldenClick" to="." method="_on_golden_click_timeout"]

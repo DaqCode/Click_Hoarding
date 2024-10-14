@@ -14,6 +14,8 @@ extends Control
 @onready var timeInt: Label = $RightSide/LabelContainer/TimePanel/TimeIntervalLabel
 @onready var randomText: Label = $RandomLabel
 @onready var pausePanel: Panel = $PausePanel
+@onready var goldenClick: Timer = $Timers/GoldenClick
+@onready var goldenClickSFX: AudioStreamPlayer = $SFX/GoldenClickAppear
 
 
 var coin_count: int = 0
@@ -33,6 +35,9 @@ func _ready() -> void:
 	multiplier = 1.00
 	multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 	timeInt.text = "Click: %.1f" % 1.00
+	goldenClick.wait_time = randf_range(1,5)
+	goldenClick.start()
+
 
 # Function to format large numbers with suffixes like "k" for thousands, "M" for millions, etc.
 func format_large_number(value: int) -> String:
@@ -43,6 +48,7 @@ func format_large_number(value: int) -> String:
 	elif value >= 1000: # Thousands
 		return "%.1fK" % (value / 1000.0)
 	return str(value)
+
 
 # Clicking upgrade Function
 # Maybe use the following formula? Multiplier = round(1 + 1.00 * pow(clickLevel, 1.10))
@@ -55,6 +61,7 @@ func _on_more_click_pressed() -> void:
 		clickUpgrade.disabled = true
 	else:
 		coin_count -= requiredCoins
+		#Problem, might have to just ignore for now..?
 		coin.text = "Coins: %.1f" % format_large_number(coin_count)
 
 		# Increment the level and update the multiplier
@@ -63,9 +70,11 @@ func _on_more_click_pressed() -> void:
 
 		# Recalculate the new requiredCoins for the next level
 		requiredCoins = round(baseCost + 10.59 * pow(clickLevel, 1.10))
+		
+		#Problem, might have to just ignore for now..?
 		clickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(requiredCoins)
 		clickUpgrade.disabled = false
-		multiplierLabel.text = "Multiplier: %.2f x" % multiplier
+		multiplierLabel.text = "Multiplier: %.1f x" % multiplier
 
 	print(requiredCoins)
 	print(multiplier)
@@ -78,17 +87,15 @@ func _on_button_pressed() -> void:
 	video_player.set_stream(clickAnimation)
 	video_player.play()
 	buttonSFX.play()
-
-	var button = getCoin
-
+	
 	#Create the +1 effect appearing and leaving.
 	randomText.text = "+%.2f Coins" % (1 * multiplier)
 	randomText.position = Vector2(randf_range(30.0, 500.0), randf_range(110.0, 548.0))
 	randomText.rotation = randf_range(-1.0, 1.0)
 	randomText.visible = true
-	await get_tree().create_timer(0.1).timeout
-	randomText.visibility = false
-	randomText.rotatiom = 0.0
+	await get_tree().create_timer(0.25).timeout
+	randomText.visible = false
+	randomText.rotation = 0.0
 	isIdle = true
 
 
@@ -149,7 +156,7 @@ func _on_blink_timer_timeout() -> void:
 
 func _on_video_stream_player_finished() -> void:
 	if isIdle:
-		await get_tree().create_timer(randf_range(3.0, 7.0)).timeout
+		await get_tree().create_timer(randf_range(7.0, 10.0)).timeout
 		video_player.stream = idleAnimation
 		video_player.play()
 
@@ -194,3 +201,10 @@ func _on_resume_pressed() -> void:
 	print("Resumed")
 	get_tree().paused = false
 	pausePanel.visible = false
+
+func _on_golden_click_timeout() -> void:
+	goldenClickSFX.play()
+	print("Golden Click!")
+	goldenClick.wait_time = randf_range(1,5)
+	print("Golden Click %f" % goldenClick.wait_time)
+	goldenClick.start()
