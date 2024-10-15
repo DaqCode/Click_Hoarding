@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://du1jip77k6aju"
+path="res://.godot/imported/Clown Horn Sound Effect Lethal Company.mp3-8a81d7f8157f3b5d45d8612f74c02dbe.mp3str"
+
+[deps]
+
+source_file="res://resources/sfx/Clown Horn Sound Effect Lethal Company.mp3"
+dest_files=["res://.godot/imported/Clown Horn Sound Effect Lethal Company.mp3-8a81d7f8157f3b5d45d8612f74c02dbe.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

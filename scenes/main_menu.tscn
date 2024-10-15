@@ -876,6 +876,7 @@ theme = SubResource("Theme_jen1e")
 text = "QUIT..."
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 13.0
 offset_top = -135.0
 offset_right = 496.0
@@ -904,7 +905,6 @@ libraries = {
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_aen6u")
-volume_db = -8.0
 autoplay = true
 
 [connection signal="pressed" from="GridContainer/PlayButton" to="." method="_on_play_button_pressed"]

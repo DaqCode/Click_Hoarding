@@ -24,8 +24,21 @@ var autoButtonActivate: bool = false
 var clickLevel: int = 1
 var autoClickLevel: int = 1
 
+#Animation variables
 var idleAnimation = preload("res://resources/heat_button_start_heat_idle_out.ogv")
 var clickAnimation = preload("res://resources/heat_button_start_heat_idle_press.ogv")
+var staerieAnimation = preload("res://resources/heat_button_example_1_out.ogv")
+var billyAnimation = preload("res://resources/heat_button_example_2_out.ogv")
+var clownAnimation = preload("res://resources/heat_button_example_3_out.ogv")
+var fishAnimation = preload("res://resources/heat_button_example_4_out.ogv")
+
+#SFX variables
+var buttonClick = preload("res://resources/sfx/buttonClick.mp3")
+var clownClick = preload("res://resources/sfx/Clown Horn Sound Effect Lethal Company.mp3")
+var fishClick = preload("res://resources/sfx/FISH.mp3")
+var boopClick = preload("res://resources/sfx/Sound Effect - Bloop Cartoon.mp3")
+var bonkClick = preload("res://resources/sfx/Bonk Sound Effect.mp3")
+
 var isIdle: bool = true
 
 func _ready() -> void:
@@ -84,20 +97,49 @@ func _on_button_pressed() -> void:
 	isIdle = false
 	coin.text = "Coins: %s" % format_large_number(coin_count)
 	coin_count += round(1 * multiplier)
-	video_player.set_stream(clickAnimation)
-	video_player.play()
+
+	# Randomly select an animation, based on rarity I guess
+	var chance = randi() % 1000 + 1
+	buttonSFX.volume_db = -10
+
+	if chance == 1:
+		video_player.set_stream(fishAnimation)
+		video_player.z_index = 2
+		buttonSFX.set_stream(fishClick)
+		
+	elif chance <= 5:
+		video_player.set_stream(clownAnimation)
+		buttonSFX.set_stream(clownClick)
+		buttonSFX.volume_db = 0
+
+	elif chance <= 50:
+		video_player.set_stream(billyAnimation)
+		buttonSFX.set_stream(boopClick)
+		buttonSFX.volume_db = 0
+
+	elif chance <= 60:
+		video_player.set_stream(staerieAnimation)
+		buttonSFX.set_stream(bonkClick)
+
+	else:
+		video_player.set_stream(clickAnimation)
+		buttonSFX.set_stream(buttonClick)
+
+	video_player.play()	
 	buttonSFX.play()
-	
+
+	video_player.z_index = 0
 	#Create the +1 effect appearing and leaving.
 	randomText.text = "+%.2f Coins" % (1 * multiplier)
 	randomText.position = Vector2(randf_range(30.0, 500.0), randf_range(110.0, 548.0))
 	randomText.rotation = randf_range(-1.0, 1.0)
 	randomText.visible = true
+	await buttonSFX.finished
 	await get_tree().create_timer(0.25).timeout
 	randomText.visible = false
 	randomText.rotation = 0.0
 	isIdle = true
-
+	
 
 # Clicking on the activation of the auto clicker
 func autoButtonUse() -> void:
@@ -203,6 +245,7 @@ func _on_resume_pressed() -> void:
 	pausePanel.visible = false
 
 func _on_golden_click_timeout() -> void:
+	
 	goldenClickSFX.play()
 	print("Golden Click!")
 	goldenClick.wait_time = randf_range(1,5)
