@@ -16,6 +16,7 @@ extends Control
 @onready var pausePanel: Panel = $PausePanel
 @onready var goldenClick: Timer = $Timers/GoldenClick
 @onready var goldenClickSFX: AudioStreamPlayer = $SFX/GoldenClickAppear
+@onready var goldenClickButton: Button = $GoldenClick
 
 
 var coin_count: int = 0
@@ -42,13 +43,14 @@ var bonkClick = preload("res://resources/sfx/Bonk Sound Effect.mp3")
 var isIdle: bool = true
 
 func _ready() -> void:
+	goldenClickButton.disabled = true
 	turretProgress.min_value = 0
-	turretProgress.max_value = 1000000
+	turretProgress.max_value = 100000000
 	turretProgress.value = 0
 	multiplier = 1.00
 	multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 	timeInt.text = "Click: %.1f" % 1.00
-	goldenClick.wait_time = randf_range(1,5)
+	goldenClick.wait_time = randf_range(1, 5)
 	goldenClick.start()
 
 
@@ -70,7 +72,7 @@ func _on_more_click_pressed() -> void:
 	var requiredCoins = round(baseCost + 10.59 * pow(clickLevel, 1.10))
 
 	if coin_count < requiredCoins:
-		clickUpgrade.text = "Required coins: %.1f" % format_large_number(requiredCoins)
+		clickUpgrade.text = "Required: %.1f coins" % format_large_number(requiredCoins)
 		clickUpgrade.disabled = true
 	else:
 		coin_count -= requiredCoins
@@ -102,7 +104,7 @@ func _on_button_pressed() -> void:
 	var chance = randi() % 1000 + 1
 	buttonSFX.volume_db = -10
 
-	if chance == 1:
+	if chance <= 1:
 		video_player.set_stream(fishAnimation)
 		video_player.z_index = 2
 		buttonSFX.set_stream(fishClick)
@@ -125,15 +127,18 @@ func _on_button_pressed() -> void:
 		video_player.set_stream(clickAnimation)
 		buttonSFX.set_stream(buttonClick)
 
-	video_player.play()	
-	buttonSFX.play()
-
-	video_player.z_index = 0
 	#Create the +1 effect appearing and leaving.
 	randomText.text = "+%.2f Coins" % (1 * multiplier)
 	randomText.position = Vector2(randf_range(30.0, 500.0), randf_range(110.0, 548.0))
 	randomText.rotation = randf_range(-1.0, 1.0)
 	randomText.visible = true
+	
+	video_player.play()	
+	buttonSFX.play()
+
+	await get_tree().create_timer(0.25).timeout
+	video_player.z_index = 0
+
 	await buttonSFX.finished
 	await get_tree().create_timer(0.25).timeout
 	randomText.visible = false
@@ -159,7 +164,7 @@ func _on_auto_click_update_pressed() -> void:
 	print("Upgrade for %d" % autoUp)
 
 	if coin_count < autoUp:
-		autoClickUpgrade.text = "Required coins: %.1f coins" % format_large_number(autoUp)
+		autoClickUpgrade.text = "Required: %.1f coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = true
 	else:
 		coin_count -= autoUp
@@ -246,8 +251,50 @@ func _on_resume_pressed() -> void:
 
 func _on_golden_click_timeout() -> void:
 	
+	goldenClickButton.disabled = false
+	goldenClickButton.position = Vector2(randf_range(30.0, 500.0), randf_range(110.0, 548.0))
+
+	goldenClickSFX.volume_db = -20.0
+	goldenClickSFX.pitch_scale = 0.5
 	goldenClickSFX.play()
-	print("Golden Click!")
 	goldenClick.wait_time = randf_range(1,5)
 	print("Golden Click %f" % goldenClick.wait_time)
 	goldenClick.start()
+
+	await get_tree().create_timer(0.25).timeout
+
+	goldenClickButton.disabled = false
+	print("Golden click despawned")
+
+
+func _on_golden_click_pressed() -> void:
+
+	var chance = randi() % 3 + 1
+
+	if chance == 1:
+		coin_count += 100
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+		goldenClickSFX.volume_db = -17.5
+		goldenClickSFX.pitch_scale = 1.2
+		goldenClickSFX.play()
+
+	elif chance == 2:
+		coin_count += 1000
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+		goldenClickSFX.volume_db = -17.5
+		goldenClickSFX.pitch_scale = 1.2
+		goldenClickSFX.play()
+	
+	elif chance == 3:
+		coin_count += 10000
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+		goldenClickSFX.volume_db = -17.5
+		goldenClickSFX.pitch_scale = 1.2
+		goldenClickSFX.play()
+
+	else:
+		coin_count += 1000
+		
+	goldenClickButton.disabled = true
+	print("Golden Click clicked, going back to waiting again")
+

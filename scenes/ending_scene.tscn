@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwfyae0tts0vy"]
+
+[ext_resource type="Script" path="res://scripts/ending_scene.gd" id="1_m7l74"]
+[ext_resource type="VideoStream" path="res://resources/endingAnimation_output.ogv" id="2_k7lhg"]
+
+[node name="endingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m7l74")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.784314, 0.956863, 0.988235, 1)
+
+[node name="endingAnimation" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 440.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+stream = ExtResource("2_k7lhg")
+autoplay = true
+
+[connection signal="finished" from="endingAnimation" to="." method="_on_ending_animation_finished"]

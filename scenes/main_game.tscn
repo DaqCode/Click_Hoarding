@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=22 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
 [ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/themes/progressTheme.tres" id="7_2lu25"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
+[ext_resource type="Theme" uid="uid://dxfakovs8mtnh" path="res://themes/themes/GoldenClick.tres" id="12_lomsj"]
 [ext_resource type="AudioStream" uid="uid://b3gfxje8gjvc" path="res://resources/music/music1.mp3" id="12_mqcs4"]
 [ext_resource type="AudioStream" uid="uid://c0pbnqwdahrlj" path="res://resources/sfx/powerUp (1).mp3" id="13_2n5l2"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
@@ -115,10 +116,10 @@ Button/colors/icon_hover_pressed_color = Color(0.755439, 0.599795, 0.375999, 1)
 Button/colors/icon_normal_color = Color(1, 1, 1, 1)
 Button/colors/icon_pressed_color = Color(0.723832, 0.570798, 0.349827, 1)
 Button/constants/align_to_largest_stylebox = 0
-Button/constants/h_separation = 4
-Button/constants/icon_max_width = 0
+Button/constants/h_separation = 7
+Button/constants/icon_max_width = 5
 Button/constants/outline_size = 0
-Button/font_sizes/font_size = 38
+Button/font_sizes/font_size = 44
 Button/fonts/font = ExtResource("13_mn0kx")
 Button/styles/disabled = SubResource("StyleBoxFlat_sr30s")
 Button/styles/hover = SubResource("StyleBoxFlat_dyv83")
@@ -358,7 +359,7 @@ theme_override_constants/shadow_outline_size = 7
 theme_override_fonts/font = ExtResource("8_i4027")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_phgnv")
-text = "Required: 1B"
+text = "Required: 100 M"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -413,7 +414,10 @@ offset_top = 15.0
 offset_right = 75.0
 offset_bottom = 75.0
 theme = SubResource("Theme_ifwe7")
+theme_override_colors/font_color = Color(0.718151, 0.917865, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_constants/h_separation = 2
+theme_override_fonts/font = ExtResource("8_i4027")
 text = "P"
 
 [node name="PausePanel" type="Panel" parent="."]
@@ -450,6 +454,15 @@ theme = ExtResource("2_pbr4b")
 theme_override_font_sizes/font_size = 48
 text = "Resume"
 
+[node name="GoldenClick" type="Button" parent="."]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 177.0
+offset_right = 173.0
+offset_bottom = 252.0
+theme = ExtResource("12_lomsj")
+action_mode = 0
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="AutoClickTimer" type="Timer" parent="Timers"]
@@ -466,7 +479,8 @@ volume_db = -10.0
 
 [node name="GoldenClickAppear" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("13_2n5l2")
-volume_db = -15.0
+volume_db = -17.5
+pitch_scale = 1.2
 
 [node name="Music" type="Node" parent="."]
 
@@ -482,5 +496,6 @@ autoplay = true
 [connection signal="pressed" from="RightSide/AutoClickUpdate" to="." method="_on_auto_click_update_pressed"]
 [connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="PausePanel/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GoldenClick" to="." method="_on_golden_click_pressed"]
 [connection signal="timeout" from="Timers/AutoClickTimer" to="." method="_on_auto_click_timeout"]
 [connection signal="timeout" from="Timers/GoldenClick" to="." method="_on_golden_click_timeout"]

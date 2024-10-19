@@ -6,7 +6,7 @@ extends Control
 func _ready() -> void:
 	animation_player.play("opening")
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished() -> void:
 	print("Opening finished, playing idel")
 	idle.play("idle")
 
