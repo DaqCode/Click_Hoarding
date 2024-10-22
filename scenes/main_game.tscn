@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=24 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cvl1fwy8adqvt" path="res://images/clickUpgrade.png" id="4_yj7ng"]
 [ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
 [ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/themes/progressTheme.tres" id="7_2lu25"]
+[ext_resource type="Texture2D" uid="uid://21fcif2rmckh" path="res://images/turret_repair.png" id="8_4bd6u"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
+[ext_resource type="Texture2D" uid="uid://doomerwod4iyt" path="res://images/activateclicker.png" id="11_b8mqk"]
 [ext_resource type="Theme" uid="uid://dxfakovs8mtnh" path="res://themes/themes/GoldenClick.tres" id="12_lomsj"]
 [ext_resource type="AudioStream" uid="uid://b3gfxje8gjvc" path="res://resources/music/music1.mp3" id="12_mqcs4"]
 [ext_resource type="AudioStream" uid="uid://c0pbnqwdahrlj" path="res://resources/sfx/powerUp (1).mp3" id="13_2n5l2"]
@@ -264,12 +266,14 @@ text = "Auto Click: Off!
 icon = ExtResource("5_l1c0y")
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="RightSide/GridContainer"]
+[node name="RepairClick" type="Button" parent="RightSide/GridContainer"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 theme = ExtResource("2_pbr4b")
+theme_override_constants/icon_max_width = 55
 text = "Repair
 Turret!"
+icon = ExtResource("8_4bd6u")
 
 [node name="LabelContainer" type="GridContainer" parent="RightSide"]
 texture_filter = 1
@@ -366,12 +370,14 @@ autowrap_mode = 3
 
 [node name="AutoClickUpdate" type="Button" parent="RightSide"]
 layout_mode = 0
-offset_left = 164.0
+offset_left = 149.0
 offset_top = 560.0
-offset_right = 305.0
+offset_right = 319.0
 offset_bottom = 627.0
 theme = ExtResource("2_pbr4b")
+theme_override_constants/icon_max_width = 45
 text = "Shorter Click"
+icon = ExtResource("11_b8mqk")
 autowrap_mode = 2
 
 [node name="TurretBuyTargetBar" type="ProgressBar" parent="."]
@@ -472,6 +478,8 @@ wait_time = 1.5
 
 [node name="GoldenClick" type="Timer" parent="Timers"]
 
+[node name="BlinkTimerDespawn" type="Timer" parent="Timers"]
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="ButtonClickSFX" type="AudioStreamPlayer" parent="SFX"]
@@ -493,9 +501,11 @@ autoplay = true
 [connection signal="pressed" from="RightSide/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="RightSide/GridContainer/MoreClick" to="." method="_on_more_click_pressed"]
 [connection signal="pressed" from="RightSide/GridContainer/AutoClick" to="." method="_on_auto_click_pressed"]
+[connection signal="pressed" from="RightSide/GridContainer/RepairClick" to="." method="_on_repair_click_pressed"]
 [connection signal="pressed" from="RightSide/AutoClickUpdate" to="." method="_on_auto_click_update_pressed"]
 [connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="PausePanel/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GoldenClick" to="." method="_on_golden_click_pressed"]
 [connection signal="timeout" from="Timers/AutoClickTimer" to="." method="_on_auto_click_timeout"]
 [connection signal="timeout" from="Timers/GoldenClick" to="." method="_on_golden_click_timeout"]
+[connection signal="timeout" from="Timers/BlinkTimerDespawn" to="." method="_on_blink_timer_despawn_timeout"]

@@ -17,6 +17,8 @@ extends Control
 @onready var goldenClick: Timer = $Timers/GoldenClick
 @onready var goldenClickSFX: AudioStreamPlayer = $SFX/GoldenClickAppear
 @onready var goldenClickButton: Button = $GoldenClick
+@onready var goldenClickDespawn: Timer = $Timers/BlinkTimerDespawn
+@onready var repairTurrent: Button = $RightSide/GridContainer/RepairClick
 
 
 var coin_count: int = 0
@@ -45,12 +47,12 @@ var isIdle: bool = true
 func _ready() -> void:
 	goldenClickButton.disabled = true
 	turretProgress.min_value = 0
-	turretProgress.max_value = 100000000
+	turretProgress.max_value = 10000000
 	turretProgress.value = 0
 	multiplier = 1.00
 	multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 	timeInt.text = "Click: %.1f" % 1.00
-	goldenClick.wait_time = randf_range(1, 5)
+	goldenClick.wait_time = randf_range(10, 15)
 	goldenClick.start()
 
 
@@ -214,6 +216,7 @@ func _process(_delta):
 	var autoBase = 100
 	var clickUp = round(clickBase + 10.59 * pow(clickLevel, 1.10))
 	var autoUp = round(autoBase + 1000 * pow(autoClickLevel, 1.9))
+	var turretUp = 1000000
 	var clickText = "Upgrade: %d coins" % clickUp
 	var autoText = "Upgrade: %d coins" % autoUp
 
@@ -238,6 +241,13 @@ func _process(_delta):
 		autoClickUpgrade.text = autoText
 		autoClickUpgrade.disabled = false
 
+	if coin_count < turretUp:
+		repairTurrent.text = "Not yet..."
+		repairTurrent.disabled = true
+	else:
+		repairTurrent.text = "Purchase!"
+		repairTurrent.disabled = false
+
 	timeInt.text = "Click: %.2f" % autoclick.wait_time 
 
 func _on_pause_pressed() -> void:
@@ -250,22 +260,20 @@ func _on_resume_pressed() -> void:
 	pausePanel.visible = false
 
 func _on_golden_click_timeout() -> void:
-	
+
+	goldenClick.wait_time = randf_range(10, 12)
+
 	goldenClickButton.disabled = false
 	goldenClickButton.position = Vector2(randf_range(30.0, 500.0), randf_range(110.0, 548.0))
 
 	goldenClickSFX.volume_db = -20.0
 	goldenClickSFX.pitch_scale = 0.5
 	goldenClickSFX.play()
-	goldenClick.wait_time = randf_range(1,5)
-	print("Golden Click %f" % goldenClick.wait_time)
-	goldenClick.start()
 
-	await get_tree().create_timer(0.25).timeout
-
-	goldenClickButton.disabled = false
-	print("Golden click despawned")
-
+	await get_tree().create_timer(0.5).timeout
+	goldenClickDespawn.wait_time = randf_range(1,2)
+	goldenClickDespawn.start()
+	print("Golden YEAH CLICK %f" % goldenClick.wait_time)
 
 func _on_golden_click_pressed() -> void:
 
@@ -274,27 +282,41 @@ func _on_golden_click_pressed() -> void:
 	if chance == 1:
 		coin_count += 100
 		coin.text = "Coins: %s" % format_large_number(coin_count)
-		goldenClickSFX.volume_db = -17.5
-		goldenClickSFX.pitch_scale = 1.2
-		goldenClickSFX.play()
 
 	elif chance == 2:
 		coin_count += 1000
 		coin.text = "Coins: %s" % format_large_number(coin_count)
-		goldenClickSFX.volume_db = -17.5
-		goldenClickSFX.pitch_scale = 1.2
-		goldenClickSFX.play()
 	
 	elif chance == 3:
 		coin_count += 10000
 		coin.text = "Coins: %s" % format_large_number(coin_count)
-		goldenClickSFX.volume_db = -17.5
-		goldenClickSFX.pitch_scale = 1.2
-		goldenClickSFX.play()
-
+	
 	else:
-		coin_count += 1000
-		
+		coin_count += 100
+
 	goldenClickButton.disabled = true
+
+	goldenClickSFX.volume_db = -17.5
+	goldenClickSFX.pitch_scale = 1.2
+	goldenClickSFX.play()
+
+	goldenClick.wait_time = randf_range(3, 5)
+	goldenClick.start()
+	
+
 	print("Golden Click clicked, going back to waiting again")
 
+func _on_blink_timer_despawn_timeout() -> void:
+	goldenClickSFX.pitch_scale = 1.0
+	goldenClickSFX.play()
+
+	goldenClickButton.disabled = true
+	goldenClickButton.position = Vector2(-1000, -1000) # Off-screen position to "hide" it
+	print("Golden click despawned, starting the spawn timer for the next one.")
+	goldenClick.wait_time = randf_range(5, 7)
+	print("1")
+	goldenClick.start()
+	print("2")
+
+func _on_repair_click_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/ending_scene.tscn")
