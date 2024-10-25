@@ -318,5 +318,6 @@ func _on_blink_timer_despawn_timeout() -> void:
 	goldenClick.start()
 	print("2")
 
+
 func _on_repair_click_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ending_scene.tscn")
