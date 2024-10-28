@@ -1,18 +1,100 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsc13poap3ipf"]
+[gd_scene load_steps=10 format=3 uid="uid://bsc13poap3ipf"]
 
 [ext_resource type="Script" path="res://scripts/eat_a_burger_sponser.gd" id="1_uyp7d"]
+[ext_resource type="Texture2D" uid="uid://bcu5xu8t6e6wn" path="res://images/triangle_PNG90.png" id="2_i5s5e"]
 [ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/themes/labelTheme.tres" id="2_lhw58"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="3_aq08x"]
+[ext_resource type="Texture2D" uid="uid://ytrxqdtxbwjo" path="res://images/image_2024-10-10_080900232-removebg-preview (1).png" id="5_frc26"]
+[ext_resource type="Texture2D" uid="uid://brmlati72iuhl" path="res://images/white-circle-transparent-free-png.webp" id="5_nsbyd"]
 
 [sub_resource type="Animation" id="Animation_3m5jh"]
 resource_name = "reveal"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrianglePng90:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.13333, 1.33333, 1.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Image2024-10-10080900232-removebg-preview(1)/PointLight2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_tbeyh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrianglePng90:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Image2024-10-10080900232-removebg-preview(1)/PointLight2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j2kkw"]
 _data = {
+"RESET": SubResource("Animation_tbeyh"),
 "reveal": SubResource("Animation_3m5jh")
 }
 
 [node name="eat_a_burger_sponser" type="Control"]
+modulate = Color(0.347817, 0.347817, 0.347817, 1)
+self_modulate = Color(0.385493, 0.385492, 0.385492, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,23 +112,34 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="TrianglePng90" type="Sprite2D" parent="."]
+modulate = Color(0.571984, 0.522056, 0.0304916, 1)
+position = Vector2(578, 354)
+rotation = -3.14159
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_i5s5e")
+
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -573.5
-offset_top = -102.0
-offset_right = 573.5
-offset_bottom = 102.0
+offset_left = -474.5
+offset_top = -57.0
+offset_right = 474.5
+offset_bottom = 147.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_lhw58")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_aq08x")
 theme_override_font_sizes/font_size = 50
-text = "There comes another new game out here..."
+text = "There comes 
+another new 
+game out here..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -54,3 +147,20 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_j2kkw")
 }
+
+[node name="Image2024-10-10080900232-removebg-preview(1)" type="Sprite2D" parent="."]
+position = Vector2(606, 286)
+texture = ExtResource("5_frc26")
+
+[node name="PointLight2D" type="PointLight2D" parent="Image2024-10-10080900232-removebg-preview(1)"]
+visible = false
+modulate = Color(0.505344, 0.505344, 0.505344, 1)
+self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
+top_level = true
+z_index = 10
+position = Vector2(648, 280)
+color = Color(1, 0.568627, 0.435294, 1)
+range_layer_max = 5
+range_item_cull_mask = 7
+texture = ExtResource("5_nsbyd")
+texture_scale = 0.1
