@@ -1,0 +1,142 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsc13poap3ipf"]
+
+[ext_resource type="Script" path="res://scripts/eat_a_burger_sponser.gd" id="1_a2615"]
+[ext_resource type="Texture2D" uid="uid://bcu5xu8t6e6wn" path="res://images/triangle_PNG90.png" id="2_x8ypy"]
+[ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/themes/labelTheme.tres" id="3_cyoq8"]
+[ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="4_5ccut"]
+[ext_resource type="Texture2D" uid="uid://ytrxqdtxbwjo" path="res://images/image_2024-10-10_080900232-removebg-preview (1).png" id="5_1smuu"]
+
+[sub_resource type="Animation" id="Animation_tbeyh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrianglePng90:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3m5jh"]
+resource_name = "reveal"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrianglePng90:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.13333, 1.33333, 1.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j2kkw"]
+_data = {
+"RESET": SubResource("Animation_tbeyh"),
+"reveal": SubResource("Animation_3m5jh")
+}
+
+[sub_resource type="Gradient" id="Gradient_o1rqt"]
+offsets = PackedFloat32Array(0, 0.603896, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.597403, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yqql2"]
+gradient = SubResource("Gradient_o1rqt")
+
+[node name="eat_a_burger_sponser" type="Control"]
+modulate = Color(0.347817, 0.347817, 0.347817, 1)
+self_modulate = Color(0.385493, 0.385492, 0.385492, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a2615")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TrianglePng90" type="Sprite2D" parent="."]
+modulate = Color(0.571984, 0.522056, 0.0304916, 1)
+position = Vector2(578, 354)
+rotation = -3.14159
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_x8ypy")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -474.5
+offset_top = -57.0
+offset_right = 474.5
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_cyoq8")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_5ccut")
+theme_override_font_sizes/font_size = 50
+text = "There comes 
+another new 
+game out here..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j2kkw")
+}
+
+[node name="Test" type="Sprite2D" parent="."]
+position = Vector2(562, 394)
+texture = ExtResource("5_1smuu")
+
+[node name="White-circle-transparent-free-png" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0.501961)
+self_modulate = Color(1, 1, 0.541176, 1)
+position = Vector2(575, 434)
+scale = Vector2(6.5, 4.20313)
+texture = SubResource("GradientTexture2D_yqql2")
