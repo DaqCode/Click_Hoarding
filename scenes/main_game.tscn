@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=26 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://b3gfxje8gjvc" path="res://resources/music/music1.mp3" id="12_mqcs4"]
 [ext_resource type="AudioStream" uid="uid://c0pbnqwdahrlj" path="res://resources/sfx/powerUp (1).mp3" id="13_2n5l2"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
+[ext_resource type="Texture2D" uid="uid://y54lnbg6xmqe" path="res://images/coin_PNG36885.png" id="15_8k5xs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phgnv"]
 bg_color = Color(0.227474, 0.620451, 0.252133, 1)
@@ -103,7 +104,7 @@ corner_radius_bottom_left = 5
 corner_detail = 5
 shadow_size = 1
 
-[sub_resource type="Theme" id="Theme_ifwe7"]
+[sub_resource type="Theme" id="Theme_0kkk3"]
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(1, 0.0588235, 0.0823529, 1)
 Button/colors/font_focus_color = Color(7.21961e-08, 2.88785e-07, 0.385399, 1)
@@ -142,6 +143,23 @@ corner_radius_bottom_left = 6
 shadow_color = Color(1, 0.766111, 0.797369, 0.211765)
 shadow_size = 3
 anti_aliasing = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fgmh1"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(50, 60, 1)
+emission_shape_scale = Vector3(100, 100, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -371.4
+angle_max = -11.4
+spread = 180.0
+flatness = 0.735
+initial_velocity_min = 360.0
+initial_velocity_max = 500.0
+angular_velocity_min = -90.0
+angular_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
@@ -419,8 +437,9 @@ offset_left = 15.0
 offset_top = 15.0
 offset_right = 75.0
 offset_bottom = 75.0
-theme = SubResource("Theme_ifwe7")
-theme_override_colors/font_color = Color(0.718151, 0.917865, 1, 1)
+theme = SubResource("Theme_0kkk3")
+theme_override_colors/font_color = Color(0.389994, 0.774341, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0.603922, 0.0392157, 1)
 theme_override_constants/outline_size = 3
 theme_override_constants/h_separation = 2
 theme_override_fonts/font = ExtResource("8_i4027")
@@ -464,10 +483,17 @@ text = "Resume"
 layout_mode = 0
 offset_left = 98.0
 offset_top = 177.0
-offset_right = 173.0
-offset_bottom = 252.0
+offset_right = 116.0
+offset_bottom = 197.047
 theme = ExtResource("12_lomsj")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.666569, 0.666569, 0.666569, 1)
+theme_override_colors/icon_hover_color = Color(0.843184, 0.843184, 0.843184, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 0.7659, 0.727378, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 0)
+theme_override_constants/icon_max_width = 40
 action_mode = 0
+icon = ExtResource("15_8k5xs")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -477,8 +503,10 @@ wait_time = 1.5
 [node name="BlinkTimer" type="Timer" parent="Timers"]
 
 [node name="GoldenClick" type="Timer" parent="Timers"]
+one_shot = true
 
 [node name="BlinkTimerDespawn" type="Timer" parent="Timers"]
+one_shot = true
 
 [node name="SFX" type="Node" parent="."]
 
@@ -496,6 +524,14 @@ pitch_scale = 1.2
 stream = ExtResource("12_mqcs4")
 volume_db = -5.0
 autoplay = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(117, 193)
+amount = 17
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_fgmh1")
+texture = ExtResource("5_l1c0y")
+explosiveness = 1.0
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="pressed" from="RightSide/Button" to="." method="_on_button_pressed"]

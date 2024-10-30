@@ -260,7 +260,6 @@ func _on_resume_pressed() -> void:
 	pausePanel.visible = false
 
 func _on_golden_click_timeout() -> void:
-
 	goldenClick.wait_time = randf_range(10, 12)
 
 	goldenClickButton.disabled = false
@@ -271,12 +270,14 @@ func _on_golden_click_timeout() -> void:
 	goldenClickSFX.play()
 
 	await get_tree().create_timer(0.5).timeout
+	goldenClickDespawn.paused = false
 	goldenClickDespawn.wait_time = randf_range(1,2)
 	goldenClickDespawn.start()
-	print("Golden YEAH CLICK %f" % goldenClick.wait_time)
+	print("Golden YEAH CLICK %f" % goldenClickDespawn.wait_time)
 
 func _on_golden_click_pressed() -> void:
-
+	goldenClickDespawn.paused = true
+	goldenClickDespawn.wait_time = randf_range(1,2)
 	var chance = randi() % 3 + 1
 
 	if chance == 1:
@@ -300,24 +301,23 @@ func _on_golden_click_pressed() -> void:
 	goldenClickSFX.pitch_scale = 1.2
 	goldenClickSFX.play()
 
-	goldenClick.wait_time = randf_range(3, 5)
+	goldenClick.wait_time = randf_range(10, 15)
 	goldenClick.start()
-	
-
+	print(goldenClick.wait_time)
 	print("Golden Click clicked, going back to waiting again")
-
-func _on_blink_timer_despawn_timeout() -> void:
-	goldenClickSFX.pitch_scale = 1.0
-	goldenClickSFX.play()
-
-	goldenClickButton.disabled = true
-	goldenClickButton.position = Vector2(-1000, -1000) # Off-screen position to "hide" it
-	print("Golden click despawned, starting the spawn timer for the next one.")
-	goldenClick.wait_time = randf_range(5, 7)
-	print("1")
-	goldenClick.start()
-	print("2")
-
 
 func _on_repair_click_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ending_scene.tscn")
+
+
+func _on_blink_timer_despawn_timeout() -> void:
+	
+	goldenClickSFX.volume_db = -20.0
+	goldenClickSFX.pitch_scale = 2.0
+	goldenClickSFX.play()
+	
+	goldenClickButton.disabled = true
+	print("despawned")
+	goldenClick.wait_time = randf_range(10,15)
+	goldenClick.start()
+	print("Respawn for %f" % goldenClick.wait_time)

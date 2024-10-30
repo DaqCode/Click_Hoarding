@@ -2,55 +2,15 @@
 
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="1_q77va"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jky18"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.101961, 0.101961, 0.101961, 0)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hsxsm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7typ"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygnyt"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pf5b"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di2df"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5r2ee"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muiwr"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ubdg"]
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -69,8 +29,8 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("1_q77va")
-Button/styles/disabled = SubResource("StyleBoxFlat_jky18")
+Button/styles/disabled = SubResource("StyleBoxEmpty_hsxsm")
 Button/styles/focus = SubResource("StyleBoxEmpty_v7typ")
-Button/styles/hover = SubResource("StyleBoxFlat_ygnyt")
-Button/styles/normal = SubResource("StyleBoxFlat_di2df")
-Button/styles/pressed = SubResource("StyleBoxFlat_muiwr")
+Button/styles/hover = SubResource("StyleBoxEmpty_0pf5b")
+Button/styles/normal = SubResource("StyleBoxEmpty_5r2ee")
+Button/styles/pressed = SubResource("StyleBoxEmpty_7ubdg")
