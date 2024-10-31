@@ -94,7 +94,7 @@ func _on_more_click_pressed() -> void:
 		#Problem, might have to just ignore for now..?
 		clickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(requiredCoins)
 		clickUpgrade.disabled = false
-		multiplierLabel.text = "Multiplier: %.1f x" % multiplier
+		multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 		upgrade_sfx.play()
 		upgrade_pfx.emitting = true
 	print(requiredCoins)
@@ -220,7 +220,7 @@ func _process(_delta):
 	var autoBase = 100
 	var clickUp = round(clickBase + 10.59 * pow(clickLevel, 1.10))
 	var autoUp = round(autoBase + 1000 * pow(autoClickLevel, 1.9))
-	var turretUp = 1000000
+	var turretUp = 10000000
 	var clickText = "Upgrade: %d coins" % clickUp
 	var autoText = "Upgrade: %d coins" % autoUp
 
@@ -272,7 +272,6 @@ func _on_golden_click_timeout() -> void:
 	goldenClickSFX.volume_db = -20.0
 	goldenClickSFX.pitch_scale = 0.5
 	goldenClickSFX.play()
-
 	await get_tree().create_timer(0.5).timeout
 	goldenClickDespawn.paused = false
 	goldenClickDespawn.wait_time = randf_range(1,2)
@@ -282,23 +281,27 @@ func _on_golden_click_timeout() -> void:
 func _on_golden_click_pressed() -> void:
 	goldenClickDespawn.paused = true
 	goldenClickDespawn.wait_time = randf_range(1,2)
-	var chance = randi() % 3 + 1
-
-	if chance == 1:
-		coin_count += 100
+		
+	if  coin_count <= 1000:
+		coin_count += randf_range(250,900)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
-
-	elif chance == 2:
-		coin_count += 1000
+			
+	elif coin_count >= 10000:
+		coin_count += randf_range(3333,9999)
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+		
+	elif coin_count >= 100000:
+		coin_count += randf_range(33333,99999)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
-	elif chance == 3:
-		coin_count += 10000
+	elif coin_count > 1000000:
+		coin_count += randf_range(5555555,9999000)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
-	
+		
 	else:
 		coin_count += 100
-	
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+		
 	golden_click_pef.emitting = true
 	
 	goldenClickButton.disabled = true

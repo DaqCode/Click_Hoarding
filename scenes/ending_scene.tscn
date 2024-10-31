@@ -69,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 stream = ExtResource("2_k7lhg")
-volume_db = -10.0
+volume_db = -5.0
 autoplay = true
 
 [node name="dissapearAnimation" type="AnimationPlayer" parent="."]

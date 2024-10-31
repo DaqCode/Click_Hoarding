@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1mlbue56gjoj"]
+[gd_scene load_steps=8 format=3 uid="uid://b1mlbue56gjoj"]
 
 [ext_resource type="Script" path="res://scripts/credits.gd" id="1_0n6qa"]
 [ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/themes/ButtonThemes.tres" id="1_my0n3"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="2_42f7e"]
+[ext_resource type="Texture2D" uid="uid://d0dxbhe0twtw8" path="res://images/heat_button_start_heat_press_image.png" id="2_hwaow"]
+[ext_resource type="AudioStream" uid="uid://b6a53sxves7qx" path="res://resources/music/calm-acoustic-quiet-quest-251658.mp3" id="5_wa33a"]
 
 [sub_resource type="Theme" id="Theme_nijh8"]
 default_font = ExtResource("2_42f7e")
@@ -21,24 +23,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0n6qa")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2287.0
+offset_top = -555.0
+offset_right = -2287.0
+offset_bottom = -555.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.317647, 0.698039, 0.317647, 1)
+scale = Vector2(3, 3)
+texture = ExtResource("2_hwaow")
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 76.0
-offset_top = -161.0
-offset_right = 260.0
-offset_bottom = -72.0
+offset_left = 923.0
+offset_top = -113.0
+offset_right = 1122.0
+offset_bottom = -24.0
 grow_vertical = 0
 theme = ExtResource("1_my0n3")
 text = "Back To Main Menu"
@@ -50,13 +58,14 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -641.0
-offset_top = -310.0
-offset_right = -13.0
-offset_bottom = 309.0
+offset_left = -1146.0
+offset_top = -200.0
+offset_right = -239.0
+offset_bottom = 325.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = SubResource("Theme_nijh8")
+theme_override_colors/default_color = Color(0.192912, 0.362738, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.585541, 0.680374, 1)
 theme_override_colors/font_shadow_color = Color(0.164706, 0.858824, 0, 1)
 text = "Lead Programmer & Developer:
@@ -67,21 +76,26 @@ Decent900
 
 This took quite the long time to be able to complete, and with just a small team of myself and another, we're glad of the progross.
 
-Hopefully this game does nearly as better as some of  the other games, as this is much more of a full scale project that was completed.
+This game took a while to complete, and the progress that was made was quite the surprise, and I'm glad how it turned out.
 
-Live  up to your expectations! Thanks for checking it out!"
+I may plan to update this in the future if it goes well. Otherwise, have a good one."
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 33.0
-offset_right = 361.0
-offset_bottom = 133.0
+offset_left = 799.0
+offset_top = 20.0
+offset_right = 1113.0
+offset_bottom = 120.0
 theme = SubResource("Theme_mi8la")
-theme_override_colors/font_color = Color(0.939255, 1, 0.932464, 1)
+theme_override_colors/font_color = Color(0, 0.821193, 0.835881, 1)
 theme_override_colors/font_shadow_color = Color(0, 1, 0, 1)
 text = "CREDITS"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wa33a")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

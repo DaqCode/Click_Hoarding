@@ -148,7 +148,7 @@ shadow_size = 3
 anti_aliasing = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fgmh1"]
-lifetime_randomness = 0.75
+lifetime_randomness = 1.0
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
@@ -156,8 +156,8 @@ angle_min = -371.4
 angle_max = -11.4
 spread = 180.0
 flatness = 0.735
-initial_velocity_min = 750.0
-initial_velocity_max = 2000.0
+initial_velocity_min = 2500.0
+initial_velocity_max = 3500.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = 180.0
 gravity = Vector3(0, 450, 0)
@@ -383,7 +383,7 @@ theme_override_constants/shadow_outline_size = 7
 theme_override_fonts/font = ExtResource("8_i4027")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_phgnv")
-text = "Required: 100 M"
+text = "Required: 10 M"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -520,8 +520,9 @@ amount = 45
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_fgmh1")
 texture = ExtResource("17_jupjh")
-lifetime = 2.5
+lifetime = 0.05
 one_shot = true
+speed_scale = 64.0
 explosiveness = 1.0
 
 [node name="Timers" type="Node" parent="."]
