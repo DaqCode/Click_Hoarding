@@ -19,6 +19,9 @@ extends Control
 @onready var goldenClickButton: Button = $GoldenClick
 @onready var goldenClickDespawn: Timer = $Timers/BlinkTimerDespawn
 @onready var repairTurrent: Button = $RightSide/GridContainer/RepairClick
+@onready var golden_click_pef = $GoldenClick/GoldenClickPEF
+@onready var upgrade_sfx = $SFX/UpgradeSFX
+@onready var upgrade_pfx = %UpgradePFX
 
 
 var coin_count: int = 0
@@ -92,7 +95,8 @@ func _on_more_click_pressed() -> void:
 		clickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(requiredCoins)
 		clickUpgrade.disabled = false
 		multiplierLabel.text = "Multiplier: %.1f x" % multiplier
-
+		upgrade_sfx.play()
+		upgrade_pfx.emitting = true
 	print(requiredCoins)
 	print(multiplier)
 
@@ -294,7 +298,9 @@ func _on_golden_click_pressed() -> void:
 	
 	else:
 		coin_count += 100
-
+	
+	golden_click_pef.emitting = true
+	
 	goldenClickButton.disabled = true
 
 	goldenClickSFX.volume_db = -17.5
@@ -303,8 +309,6 @@ func _on_golden_click_pressed() -> void:
 
 	goldenClick.wait_time = randf_range(10, 15)
 	goldenClick.start()
-	print(goldenClick.wait_time)
-	print("Golden Click clicked, going back to waiting again")
 
 func _on_repair_click_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ending_scene.tscn")
