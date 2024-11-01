@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsc13poap3ipf"]
+[gd_scene load_steps=12 format=3 uid="uid://bsc13poap3ipf"]
 
 [ext_resource type="Script" path="res://scripts/eat_a_burger_sponser.gd" id="1_moqlf"]
-[ext_resource type="Texture2D" uid="uid://d0dxbhe0twtw8" path="res://images/heat_button_start_heat_press_image.png" id="2_u8jbw"]
+[ext_resource type="Texture2D" uid="uid://b3sk0ilus8elr" path="res://images/backgroundSpoiler.png" id="2_6vs0s"]
 [ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/themes/labelTheme.tres" id="3_w1ttl"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="4_vtvqv"]
 [ext_resource type="Texture2D" uid="uid://bcu5xu8t6e6wn" path="res://images/triangle_PNG90.png" id="5_dkkk4"]
+[ext_resource type="AudioStream" uid="uid://cu7t40imfo3xc" path="res://resources/sfx/AmbienceTWO.mp3" id="6_7vmbw"]
+[ext_resource type="AudioStream" uid="uid://i18g6738s0rl" path="res://resources/sfx/breathing.mp3" id="7_roel3"]
+[ext_resource type="AudioStream" uid="uid://ctamq8c8rr2ul" path="res://resources/sfx/flickerLights.mp3" id="8_k8r51"]
 
 [sub_resource type="Animation" id="Animation_tbeyh"]
 length = 0.001
@@ -92,10 +95,58 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Breathe:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Ambiant:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FlickerLights:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FlickerLights:volume_db")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
 
 [sub_resource type="Animation" id="Animation_3m5jh"]
 resource_name = "reveal"
-length = 14.0
+length = 14.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -142,7 +193,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(1.46667, 2.36667, 10.1667, 10.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(0.0177324, 0.0177324, 0.0177324, 1), Color(0.197937, 0.197937, 0.197937, 1), Color(0.197937, 0.197937, 0.197937, 1), Color(0, 0, 0, 1)]
+"values": [Color(0.0177324, 0.0177324, 0.0177324, 1), Color(0.125911, 0.125911, 0.125911, 1), Color(0.12549, 0.12549, 0.12549, 1), Color(0, 0, 0, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -180,6 +231,54 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Breathe:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.92, 4.54, 6.15, 7.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Ambiant:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 14.0302),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FlickerLights:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2.53, 2.87095, 4.43233, 14.0302),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FlickerLights:volume_db")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 2.51765, 2.53386, 4.48964, 4.49504, 4.53826, 4.56125, 5.63501, 5.63638, 5.64581, 14.0302),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-80.0, -80.0, 0.0, 0.0, -78.8388, -80.0, -80.0, -80.0, 0.0, 0.0, -80.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j2kkw"]
 _data = {
@@ -195,6 +294,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_moqlf")
+metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -212,9 +312,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_u8jbw")
+texture = ExtResource("2_6vs0s")
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -260,14 +361,27 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_j2kkw")
 }
+autoplay = "reveal"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(510, 262)
+position = Vector2(674, 449)
 rotation = 3.14159
 enabled = false
-color = Color(0.968712, 0.846866, 0.490505, 1)
-energy = 5.28
+color = Color(0.649234, 0.532398, 0.149323, 1)
+energy = 10.1
 texture = ExtResource("5_dkkk4")
 texture_scale = 0.75
+
+[node name="Ambiant" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_7vmbw")
+volume_db = -10.0
+
+[node name="Breathe" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_roel3")
+pitch_scale = 0.75
+
+[node name="FlickerLights" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_k8r51")
+volume_db = -80.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

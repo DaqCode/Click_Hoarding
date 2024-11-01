@@ -19,9 +19,9 @@ extends Control
 @onready var goldenClickButton: Button = $GoldenClick
 @onready var goldenClickDespawn: Timer = $Timers/BlinkTimerDespawn
 @onready var repairTurrent: Button = $RightSide/GridContainer/RepairClick
-@onready var golden_click_pef = $GoldenClick/GoldenClickPEF
-@onready var upgrade_sfx = $SFX/UpgradeSFX
-@onready var upgrade_pfx = %UpgradePFX
+@onready var golden_click_pef: GPUParticles2D = $GoldenClick/GoldenClickPEF
+@onready var upgrade_sfx: AudioStreamPlayer = $SFX/UpgradeSFX
+@onready var upgrade_pfx: GPUParticles2D = %UpgradePFX
 
 
 var coin_count: int = 0
@@ -52,7 +52,7 @@ func _ready() -> void:
 	turretProgress.min_value = 0
 	turretProgress.max_value = 10000000
 	turretProgress.value = 0
-	multiplier = 1.00
+	multiplier = 1000000.00
 	multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 	timeInt.text = "Click: %.1f" % 1.00
 	goldenClick.wait_time = randf_range(10, 15)

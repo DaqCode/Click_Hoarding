@@ -756,9 +756,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -271.0
+offset_left = -357.0
 offset_top = -118.0
-offset_right = 122.0
+offset_right = 36.0
 offset_bottom = 541.0
 grow_vertical = 2
 scale = Vector2(0.305, 0.305)
@@ -766,9 +766,9 @@ texture = ExtResource("5_dt8ob")
 
 [node name="Label" type="Label" parent="IntroPanel"]
 layout_mode = 0
-offset_left = -386.0
+offset_left = -472.0
 offset_top = 408.0
-offset_right = -4.0
+offset_right = -90.0
 offset_bottom = 529.0
 theme_override_colors/font_color = Color(7.12335e-06, 0.826549, 0.865695, 1)
 theme_override_fonts/font = ExtResource("7_cl4i1")
@@ -784,9 +784,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 101.0
+offset_left = 148.0
 offset_top = -108.0
-offset_right = 362.0
+offset_right = 409.0
 offset_bottom = 110.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -794,9 +794,9 @@ texture = ExtResource("7_as6hs")
 
 [node name="Label2" type="Label" parent="IntroPanel"]
 layout_mode = 0
-offset_left = 1192.0
+offset_left = 1153.0
 offset_top = 409.0
-offset_right = 1845.0
+offset_right = 1806.0
 offset_bottom = 592.0
 theme_override_colors/font_color = Color(7.12335e-06, 0.826549, 0.865695, 1)
 theme_override_fonts/font = ExtResource("7_cl4i1")
@@ -880,9 +880,9 @@ text = "QUIT..."
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 6.0
+offset_top = -135.0
 offset_right = 496.0
-offset_bottom = 111.0
+offset_bottom = -30.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.482607, 1, 0.986028, 1)
 theme_override_colors/font_outline_color = Color(1, 0.465438, 0.387502, 1)
@@ -922,3 +922,4 @@ pitch_scale = 2.0
 [connection signal="mouse_entered" from="GridContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="GridContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_animation_player_2_animation_finished"]
