@@ -50,9 +50,9 @@ var isIdle: bool = true
 func _ready() -> void:
 	goldenClickButton.disabled = true
 	turretProgress.min_value = 0
-	turretProgress.max_value = 10000000
+	turretProgress.max_value = 1000000
 	turretProgress.value = 0
-	multiplier = 1000000.00
+	multiplier = 1.00
 	multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 	timeInt.text = "Click: %.1f" % 1.00
 	goldenClick.wait_time = randf_range(10, 15)
@@ -74,7 +74,7 @@ func format_large_number(value: int) -> String:
 # Maybe use the following formula? Multiplier = round(1 + 1.00 * pow(clickLevel, 1.10))
 func _on_more_click_pressed() -> void:
 	var baseCost = 10
-	var requiredCoins = round(baseCost + 10.59 * pow(clickLevel, 1.10))
+	var requiredCoins = round(baseCost + 25.5 * pow(clickLevel, 1.10))
 
 	if coin_count < requiredCoins:
 		clickUpgrade.text = "Required: %.1f coins" % format_large_number(requiredCoins)
@@ -179,7 +179,7 @@ func _on_auto_click_update_pressed() -> void:
 		autoClickLevel += 1
 		autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
 
-		autoClickUpgrade.text = "Upgrade: %s coins" % format_large_number(autoUp)
+		autoClickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = false
 
 		# Decrease the interval for the autoclicker based on autoClickLevel
@@ -218,28 +218,28 @@ func _on_video_stream_player_finished() -> void:
 func _process(_delta):
 	var clickBase = 10
 	var autoBase = 100
-	var clickUp = round(clickBase + 10.59 * pow(clickLevel, 1.10))
+	var clickUp = round(clickBase + 25.5 * pow(clickLevel, 1.10))
 	var autoUp = round(autoBase + 1000 * pow(autoClickLevel, 1.9))
-	var turretUp = 10000000
+	var turretUp = 1000000
 	var clickText = "Upgrade: %d coins" % clickUp
 	var autoText = "Upgrade: %d coins" % autoUp
 
 	# Update the coin text using the formatted large number
-	coin.text = "Coins: %s" % format_large_number(coin_count)
+	coin.text = "Coins: %.s" % format_large_number(coin_count)
 
 	# Update the progress bar based on the coin count
 	turretProgress.value = coin_count
 	
 	# Check if upgrades are available and update button states
 	if coin_count < clickUp:
-		clickUpgrade.text = "Required coins: %s" % format_large_number(clickUp)
+		clickUpgrade.text = "Required coins: %.s" % format_large_number(clickUp)
 		clickUpgrade.disabled = true
 	else:
 		clickUpgrade.text = clickText
 		clickUpgrade.disabled = false
 
 	if coin_count < autoUp:
-		autoClickUpgrade.text = "Required coins: %s" % format_large_number(autoUp)
+		autoClickUpgrade.text = "Required coins: %.s" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = true
 	else:
 		autoClickUpgrade.text = autoText
@@ -328,3 +328,8 @@ func _on_blink_timer_despawn_timeout() -> void:
 	goldenClick.wait_time = randf_range(10,15)
 	goldenClick.start()
 	print("Respawn for %f" % goldenClick.wait_time)
+
+
+func _on_btmm_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu2.tscn")
+	get_tree().paused = false
