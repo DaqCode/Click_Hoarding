@@ -25,8 +25,8 @@ extends Control
 @onready var pauseLabel: Label = $PausePanel/Label
 @onready var click_pef: GPUParticles2D = $RightSide/Button/ClickPEF
 @onready var enemy_spawn_timer: Timer = $Timers/EnemySpawnTimer
-@onready var enemy_random_spawn = $EnemyRandomSpawn
-
+@onready var enemy_random_spawn: Button = $EnemyRandomSpawn
+@onready var health_bar: ProgressBar = $EnemyRandomSpawn/HealthBar
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -59,14 +59,24 @@ var isIdle: bool = true
 
 func _ready() -> void:
 	goldenClickButton.disabled = true
+	
 	turretProgress.min_value = 0
 	turretProgress.max_value = 1000000
 	turretProgress.value = 0
+	
 	multiplier = 1.00
 	multiplierLabel.text = "Multiplier: %.2f x" % multiplier
+	
 	timeInt.text = "Click: %.1f" % 1.00
+	
 	goldenClick.wait_time = randf_range(10, 15)
 	goldenClick.start()
+	
+	enemy_spawn_timer.wait_time = randf_range(5,7)
+	enemy_spawn_timer.start()
+	enemy_random_spawn.disabled = true
+	health_bar.visible = false
+	
 
 
 # Function to format large numbers with suffixes like "k" for thousands, "M" for millions, etc.
@@ -389,12 +399,53 @@ func _on_btmm_pressed() -> void:
 
 
 func _on_enemy_random_spawn_pressed():
-	#Make it take damage. Check if its down.
+	var enemyPositionX = enemy_random_spawn.position.x
+	var enemyPositionY = enemy_random_spawn.position.y
+	
+	enemy_random_spawn.position = Vector2(enemyPositionX+(randf_range(50, 100)), enemyPositionY+(randf_range(50,500)))
+	if (!health_bar.value == 1):
+		health_bar.value -=1
+	else:
+		print("enemy died")
+		enemy_random_spawn.disabled = true
+		health_bar.value = 5
+		health_bar.visible = false
+		
+		enemy_spawn_timer.wait_time = randf_range(5,7)
+		print(enemy_spawn_timer.wait_time)
+		enemy_spawn_timer.start()
+		
+		if coin_count <= 1000:
+			coin_count += randf_range(750,1250)
+			coin.text = "Coins: %s" % format_large_number(coin_count)
+	
+		elif coin_count >= 1000:
+			coin_count += randf_range(5000,8000)
+			coin.text = "Coins: %s" % format_large_number(coin_count)
+		
+		elif coin_count >= 10000:
+			coin_count += randf_range(9000,30000)
+			coin.text = "Coins: %s" % format_large_number(coin_count)
+			
+		elif coin_count >= 100000:
+			coin_count += randf_range(33333,99999)
+			coin.text = "Coins: %s" % format_large_number(coin_count)
+			
+		else:
+			coin_count += 1000
+			coin.text = "Coins: %s" % format_large_number(coin_count)
+	
+	enemy_random_spawn.position = Vector2(0,0) 
+	
 	#If it is, die, give coins, and reset the timer for spawning.
 	#Coins given are dependent of how much coins the player has now.
 	pass
 
 
 func _on_enemy_spawn_timer_timeout():
+	enemy_random_spawn.position = Vector2(randf_range(250,950),randf_range(300,400)) 
+	print(enemy_random_spawn.position)
+	health_bar.visible = true
 	enemy_random_spawn.disabled = false
+	
 	
