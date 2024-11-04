@@ -22,6 +22,10 @@ extends Control
 @onready var golden_click_pef: GPUParticles2D = $GoldenClick/GoldenClickPEF
 @onready var upgrade_sfx: AudioStreamPlayer = $SFX/UpgradeSFX
 @onready var upgrade_pfx: GPUParticles2D = %UpgradePFX
+@onready var pauseLabel: Label = $PausePanel/Label
+@onready var click_pef: GPUParticles2D = $RightSide/Button/ClickPEF
+@onready var enemy_spawn_timer: Timer = $Timers/EnemySpawnTimer
+@onready var enemy_random_spawn = $EnemyRandomSpawn
 
 
 var coin_count: int = 0
@@ -44,6 +48,12 @@ var clownClick = preload("res://resources/sfx/Clown Horn Sound Effect Lethal Com
 var fishClick = preload("res://resources/sfx/FISH.mp3")
 var boopClick = preload("res://resources/sfx/Sound Effect - Bloop Cartoon.mp3")
 var bonkClick = preload("res://resources/sfx/Bonk Sound Effect.mp3")
+
+#Image variables
+const MENU1 = preload("res://images/menuImage/menu_png_1_test.png")
+const MENU2 = preload("res://images/menuImage/menu_png_2_test.png")
+const MENU3 = preload("res://images/menuImage/menu_png_3_test.png")
+const MENU4 = preload("res://images/menuImage/menu_png_4_test_wtf.png")
 
 var isIdle: bool = true
 
@@ -102,6 +112,7 @@ func _on_more_click_pressed() -> void:
 
 # Clicking on the money generator
 func _on_button_pressed() -> void:
+	click_pef.emitting = true
 	isIdle = false
 	coin.text = "Coins: %s" % format_large_number(coin_count)
 	coin_count += round(1 * multiplier)
@@ -151,7 +162,6 @@ func _on_button_pressed() -> void:
 	randomText.rotation = 0.0
 	isIdle = true
 	
-
 # Clicking on the activation of the auto clicker
 func autoButtonUse() -> void:
 	if autoButtonActivate == true:
@@ -257,6 +267,45 @@ func _process(_delta):
 func _on_pause_pressed() -> void:
 	get_tree().paused = true
 	pausePanel.visible = true
+	
+	var randomStatement = randi_range(1,10)
+	var randomImage = randi_range(1,4)
+	
+	match randomImage:
+		1:
+			$PausePanel/TextureRect.texture = MENU1
+			$PausePanel/TextureRect.position = Vector2(-327.5, -118.5)
+		2:
+			$PausePanel/TextureRect.texture = MENU2
+			$PausePanel/TextureRect.position = Vector2(-364.5, -64.5)
+		3:
+			$PausePanel/TextureRect.texture = MENU3
+			$PausePanel/TextureRect.position = Vector2(-354.5, -134.5)
+		4:
+			$PausePanel/TextureRect.texture = MENU4
+			$PausePanel/TextureRect.position = Vector2(-364.5, -64.5)
+	
+	match randomStatement:
+		1:
+			pauseLabel.text = "The golden clicks all give you different amounts depending on how much coins you have now."
+		2:
+			pauseLabel.text = "This took a month or 2 or 3 to make. It was fun to make though. I hope you enjoy."
+		3:
+			pauseLabel.text = "Yes, you can use an autocicker. Things might break though."
+		4:
+			pauseLabel.text = "What's the average time to beat this game? Probably a bit less than an hour."
+		5:
+			pauseLabel.text = "There's not much lore to Heat himself. Neither is there to Staerie."
+		6:
+			pauseLabel.text = "Yes, Heat does live rent free in my head and is the average goof ball."
+		7:
+			pauseLabel.text = "Every click of the button will give you a chance to get a rare animation. Find em all?"
+		8:
+			pauseLabel.text = "If you think about it, there's thoughts in a thought..."
+		9:
+			pauseLabel.text = "Man, being a game developer is kinda hard, but it's fun."
+		10:
+			pauseLabel.text = "ღゝ ◡╹ )ノ♡"
 
 func _on_resume_pressed() -> void:
 	print("Resumed")
@@ -285,7 +334,11 @@ func _on_golden_click_pressed() -> void:
 	if  coin_count <= 1000:
 		coin_count += randf_range(250,900)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
-			
+	
+	elif coin_count >= 1000:
+		coin_count += randf_range(1000,2999)
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+	
 	elif coin_count >= 10000:
 		coin_count += randf_range(3333,9999)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
@@ -331,5 +384,17 @@ func _on_blink_timer_despawn_timeout() -> void:
 
 
 func _on_btmm_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu2.tscn")
 	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main_menu2.tscn")
+
+
+func _on_enemy_random_spawn_pressed():
+	#Make it take damage. Check if its down.
+	#If it is, die, give coins, and reset the timer for spawning.
+	#Coins given are dependent of how much coins the player has now.
+	pass
+
+
+func _on_enemy_spawn_timer_timeout():
+	enemy_random_spawn.disabled = false
+	

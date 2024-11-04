@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=36 format=3 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dr6ngagif23me" path="res://images/coinHover.png" id="3_cpofu"]
 [ext_resource type="Texture2D" uid="uid://cvl1fwy8adqvt" path="res://images/clickUpgrade.png" id="4_yj7ng"]
 [ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
+[ext_resource type="Texture2D" uid="uid://p7j41r6ejmru" path="res://images/pixel.png" id="6_auo8h"]
 [ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/themes/progressTheme.tres" id="7_2lu25"]
 [ext_resource type="Texture2D" uid="uid://21fcif2rmckh" path="res://images/turret_repair.png" id="8_4bd6u"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
@@ -17,9 +18,20 @@
 [ext_resource type="AudioStream" uid="uid://c0pbnqwdahrlj" path="res://resources/sfx/powerUp (1).mp3" id="13_2n5l2"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
 [ext_resource type="Texture2D" uid="uid://bagkqkbd78nhg" path="res://images/goldenClick.png" id="15_khtqr"]
-[ext_resource type="Texture2D" uid="uid://curv627kfjxp2" path="res://images/particle.png" id="16_fjm2s"]
-[ext_resource type="Texture2D" uid="uid://dxhr13nqjwhcu" path="res://images/upgrade.png" id="17_jupjh"]
+[ext_resource type="Texture2D" uid="uid://eiwkjm5vq0so" path="res://images/overtrulent_enemety.png" id="17_u7vcn"]
+[ext_resource type="Texture2D" uid="uid://co0gal04638fk" path="res://images/menuImage/menu_png_1_test.png" id="18_xkqxq"]
 [ext_resource type="AudioStream" uid="uid://dkg4teq2stmmx" path="res://resources/sfx/powerUp.mp3" id="19_skst1"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_usgyu"]
+particle_flag_disable_z = true
+velocity_pivot = Vector3(100, 100, 100)
+spread = 131.897
+initial_velocity_min = 750.0
+initial_velocity_max = 1000.0
+angular_velocity_min = 100.0
+angular_velocity_max = 1000.0
+gravity = Vector3(0, 500, 0)
+scale_max = 2.5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phgnv"]
 bg_color = Color(0.227474, 0.620451, 0.252133, 1)
@@ -38,17 +50,24 @@ anti_aliasing = false
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fgmh1"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-angle_min = -371.4
-angle_max = -11.4
-spread = 180.0
-flatness = 0.735
-initial_velocity_min = 2500.0
-initial_velocity_max = 3500.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 180.0
-gravity = Vector3(0, 450, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 500, 0)
+scale_min = 0.1
+scale_max = 0.1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_arv2w"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+initial_velocity_min = 250.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 900, 0)
+scale_min = 0.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gw4kq"]
+load_path = "res://.godot/imported/upgrade.png-37b29914991734ea2a37d991d6e2b019.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr30s"]
 content_margin_left = 4.0
@@ -147,6 +166,11 @@ Button/styles/hover = SubResource("StyleBoxFlat_dyv83")
 Button/styles/normal = SubResource("StyleBoxFlat_y46pu")
 Button/styles/pressed = SubResource("StyleBoxFlat_gjfp6")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8kd3v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmfe3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61wkl"]
 bg_color = Color(0.427451, 0.819608, 1, 0.878431)
 border_width_left = 4
@@ -161,6 +185,14 @@ corner_radius_bottom_left = 6
 shadow_color = Color(1, 0.766111, 0.797369, 0.211765)
 shadow_size = 3
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgqmv"]
+bg_color = Color(0, 0.662745, 0.823529, 0.337255)
+border_color = Color(0, 0.768935, 0, 1)
+corner_radius_top_left = 17
+corner_radius_top_right = 17
+corner_radius_bottom_right = 17
+corner_radius_bottom_left = 17
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
@@ -223,6 +255,17 @@ text = "Click to get coins!"
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
+
+[node name="ClickPEF" type="GPUParticles2D" parent="RightSide/Button"]
+position = Vector2(185.5, 52)
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_usgyu")
+texture = ExtResource("6_auo8h")
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
 
 [node name="CoinLabel" type="Label" parent="RightSide"]
 layout_mode = 1
@@ -452,13 +495,13 @@ expand_icon = true
 
 [node name="GoldenClickPEF" type="GPUParticles2D" parent="GoldenClick"]
 modulate = Color(0.935732, 0.946346, 0, 1)
-position = Vector2(28, 21)
+position = Vector2(30, 43)
+rotation = -1.5708
 emitting = false
-amount = 40
+amount = 28
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_fgmh1")
-texture = ExtResource("16_fjm2s")
-lifetime = 0.5
+texture = ExtResource("3_cpofu")
 one_shot = true
 explosiveness = 1.0
 randomness = 0.7
@@ -466,16 +509,17 @@ randomness = 0.7
 [node name="UpgradePFX" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(0.935732, 0.946346, 0, 1)
-position = Vector2(704, 493)
+position = Vector2(701, 543)
+rotation = -1.56968
 emitting = false
 amount = 45
 sub_emitter = NodePath(".")
-process_material = SubResource("ParticleProcessMaterial_fgmh1")
-texture = ExtResource("17_jupjh")
-lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_arv2w")
+texture = SubResource("CompressedTexture2D_gw4kq")
+lifetime = 0.5
 one_shot = true
-speed_scale = 64.0
 explosiveness = 1.0
+randomness = 1.0
 
 [node name="Pause" type="Button" parent="."]
 layout_mode = 0
@@ -490,6 +534,46 @@ theme_override_constants/outline_size = 3
 theme_override_constants/h_separation = 2
 theme_override_fonts/font = ExtResource("8_i4027")
 text = "P"
+
+[node name="EnemyRandomSpawn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 394.0
+offset_right = 512.0
+offset_bottom = 534.0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.726223, 3.41728e-06, 5.77569e-07, 1)
+theme_override_colors/icon_hover_color = Color(0.489622, 0.489622, 0.489622, 1)
+theme_override_icons/icon = ExtResource("17_u7vcn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rmfe3")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_8kd3v")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8kd3v")
+icon = ExtResource("17_u7vcn")
+expand_icon = true
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyRandomSpawn"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = 1.0
+offset_right = 73.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 5.0
+step = 1.0
 
 [node name="PausePanel" type="Panel" parent="."]
 visible = false
@@ -506,6 +590,23 @@ offset_bottom = 214.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_61wkl")
+
+[node name="TextureRect" type="TextureRect" parent="PausePanel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -721.0
+offset_top = -333.0
+offset_right = 1199.0
+offset_bottom = 747.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("18_xkqxq")
 
 [node name="Resume" type="Button" parent="PausePanel"]
 process_mode = 3
@@ -541,9 +642,30 @@ theme_override_font_sizes/font_size = 35
 text = "Main Menu"
 
 [node name="Label" type="Label" parent="PausePanel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -284.0
+offset_top = 36.5
+offset_right = 284.0
+offset_bottom = 152.5
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.960784, 0.427451, 1)
+theme_override_colors/font_shadow_color = Color(0.279775, 0.418705, 1, 1)
+theme_override_colors/font_outline_color = Color(0.192394, 0.512824, 1, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("8_i4027")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_rgqmv")
+text = "This is the sample. Remember you're playin the agme, noasdnas"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Timers" type="Node" parent="."]
 
@@ -557,6 +679,8 @@ one_shot = true
 
 [node name="BlinkTimerDespawn" type="Timer" parent="Timers"]
 one_shot = true
+
+[node name="EnemySpawnTimer" type="Timer" parent="Timers"]
 
 [node name="SFX" type="Node" parent="."]
 
@@ -587,8 +711,11 @@ autoplay = true
 [connection signal="pressed" from="RightSide/AutoClickUpdate" to="." method="_on_auto_click_update_pressed"]
 [connection signal="pressed" from="GoldenClick" to="." method="_on_golden_click_pressed"]
 [connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="EnemyRandomSpawn" to="." method="_on_enemy_random_spawn_pressed"]
 [connection signal="pressed" from="PausePanel/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PausePanel/BTMM" to="." method="_on_btmm_pressed"]
+[connection signal="ready" from="PausePanel/Label" to="PausePanel" method="_on_label_ready"]
 [connection signal="timeout" from="Timers/AutoClickTimer" to="." method="_on_auto_click_timeout"]
 [connection signal="timeout" from="Timers/GoldenClick" to="." method="_on_golden_click_timeout"]
 [connection signal="timeout" from="Timers/BlinkTimerDespawn" to="." method="_on_blink_timer_despawn_timeout"]
+[connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
