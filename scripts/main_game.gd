@@ -28,6 +28,8 @@ extends Control
 @onready var enemy_random_spawn: Button = $EnemyRandomSpawn
 @onready var health_bar: ProgressBar = $EnemyRandomSpawn/HealthBar
 @onready var enemy_bite: Timer = $Timers/EnemyBite
+@onready var bite_text: Label = $BiteText
+@onready var amount_lost: Label = $BiteText/AmountLost
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -78,7 +80,7 @@ func _ready() -> void:
 	enemy_random_spawn.disabled = true
 	health_bar.visible = false
 	
-
+	bite_text.visible = false
 
 # Function to format large numbers with suffixes like "k" for thousands, "M" for millions, etc.
 func format_large_number(value: int) -> String:
@@ -449,14 +451,34 @@ func _on_enemy_spawn_timer_timeout():
 	print(enemy_random_spawn.position)
 	health_bar.visible = true
 	enemy_random_spawn.disabled = false
-	enemy_bite.wait_time = randi_range(4,6)
+	enemy_bite.wait_time = randi_range(2,4)
 	enemy_bite.start()
 	
 
 func _on_enemy_bite_timeout() -> void:
-	print ("HE BIT YOU")
+	var randomNumber = randi_range(1,4)
 	enemy_random_spawn.disabled = true
 	health_bar.visible = false
 	
 	enemy_spawn_timer.wait_time = randf_range(10, 15)
 	enemy_spawn_timer.start()
+	
+	print("BiteText Visible")
+	bite_text.visible = true
+	bite_text.rotation = randf_range(-5, 5)
+	
+	match randomNumber:
+		1:
+			bite_text.text = "BITTEN!"
+		2:
+			bite_text.text = "YEEEOWWWCH!"
+		3:
+			bite_text.text = "THAT HURT :("
+		
+	
+	#match case for bite_text.visible
+	#amount_lost = some amount
+	await get_tree().create_timer(3).timeout
+	print("Untrue for timer now get out of here you prick")
+	bite_text.visible = false
+	bite_text.rotation = 0
