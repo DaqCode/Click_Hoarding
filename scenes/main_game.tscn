@@ -1972,11 +1972,14 @@ theme_override_fonts/font = ExtResource("8_i4027")
 text = "P"
 
 [node name="EnemyRandomSpawn" type="Button" parent="."]
-layout_mode = 0
-offset_left = 365.0
-offset_top = 394.0
-offset_right = 512.0
-offset_bottom = 534.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -198.0
+offset_top = 637.0
+offset_right = -1164.0
+offset_bottom = 167.0
 theme = SubResource("Theme_q4jft")
 theme_override_icons/icon = ExtResource("17_u7vcn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_8kd3v")
@@ -2102,6 +2105,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="BiteText" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="AutoClickTimer" type="Timer" parent="Timers"]
@@ -2116,6 +2124,9 @@ one_shot = true
 one_shot = true
 
 [node name="EnemySpawnTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="EnemyBite" type="Timer" parent="Timers"]
 one_shot = true
 
 [node name="SFX" type="Node" parent="."]
@@ -2155,3 +2166,4 @@ autoplay = true
 [connection signal="timeout" from="Timers/GoldenClick" to="." method="_on_golden_click_timeout"]
 [connection signal="timeout" from="Timers/BlinkTimerDespawn" to="." method="_on_blink_timer_despawn_timeout"]
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/EnemyBite" to="." method="_on_enemy_bite_timeout"]

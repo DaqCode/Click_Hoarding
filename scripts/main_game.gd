@@ -27,6 +27,7 @@ extends Control
 @onready var enemy_spawn_timer: Timer = $Timers/EnemySpawnTimer
 @onready var enemy_random_spawn: Button = $EnemyRandomSpawn
 @onready var health_bar: ProgressBar = $EnemyRandomSpawn/HealthBar
+@onready var enemy_bite: Timer = $Timers/EnemyBite
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -399,14 +400,14 @@ func _on_btmm_pressed() -> void:
 
 
 func _on_enemy_random_spawn_pressed():
-	var enemyPositionX = enemy_random_spawn.position.x
-	var enemyPositionY = enemy_random_spawn.position.y
+	enemy_random_spawn.position = Vector2(randf_range(300,500), randf_range(350, 375)) 
 	
-	enemy_random_spawn.position = Vector2(enemyPositionX+(randf_range(50, 100)), enemyPositionY+(randf_range(50,500)))
 	if (!health_bar.value == 1):
 		health_bar.value -=1
 	else:
 		print("enemy died")
+		enemy_bite.stop()
+		
 		enemy_random_spawn.disabled = true
 		health_bar.value = 5
 		health_bar.visible = false
@@ -434,8 +435,9 @@ func _on_enemy_random_spawn_pressed():
 		else:
 			coin_count += 1000
 			coin.text = "Coins: %s" % format_large_number(coin_count)
-	
-	enemy_random_spawn.position = Vector2(0,0) 
+			
+		enemy_random_spawn.position = Vector2(-1000,320) 
+		enemy_bite.wait_time = randf_range(4,6)
 	
 	#If it is, die, give coins, and reset the timer for spawning.
 	#Coins given are dependent of how much coins the player has now.
@@ -447,5 +449,14 @@ func _on_enemy_spawn_timer_timeout():
 	print(enemy_random_spawn.position)
 	health_bar.visible = true
 	enemy_random_spawn.disabled = false
+	enemy_bite.wait_time = randi_range(4,6)
+	enemy_bite.start()
 	
+
+func _on_enemy_bite_timeout() -> void:
+	print ("HE BIT YOU")
+	enemy_random_spawn.disabled = true
+	health_bar.visible = false
 	
+	enemy_spawn_timer.wait_time = randf_range(10, 15)
+	enemy_spawn_timer.start()
