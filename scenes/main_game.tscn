@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=58 format=4 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -1638,6 +1638,15 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0wrc1"]
+particle_flag_disable_z = true
+direction = Vector3(100, 100, 0)
+spread = 47.05
+initial_velocity_min = 100.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 180, 0)
+scale_max = 3.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61wkl"]
 bg_color = Color(0.427451, 0.819608, 1, 0.878431)
 border_width_left = 4
@@ -2054,6 +2063,11 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_22l35")
 max_value = 5.0
 step = 1.0
 value = 5.0
+
+[node name="PixelBlood" type="GPUParticles2D" parent="EnemyRandomSpawn"]
+position = Vector2(91, 89)
+rotation = -2.46417
+process_material = SubResource("ParticleProcessMaterial_0wrc1")
 
 [node name="PausePanel" type="Panel" parent="."]
 visible = false
