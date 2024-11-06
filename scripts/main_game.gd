@@ -83,7 +83,7 @@ func _ready() -> void:
 	goldenClick.wait_time = randf_range(10, 15)
 	goldenClick.start()
 	
-	enemy_spawn_timer.wait_time = randf_range(60, 100)
+	enemy_spawn_timer.wait_time = randf_range(5, 6)
 	enemy_spawn_timer.start()
 	enemy_random_spawn.disabled = true
 	health_bar.visible = false

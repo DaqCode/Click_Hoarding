@@ -1959,7 +1959,6 @@ theme_override_font_sizes/font_size = 48
 text = "+1 Coin!"
 
 [node name="GoldenClick" type="Button" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 156.0
 offset_top = 245.0
@@ -2072,9 +2071,11 @@ value = 5.0
 modulate = Color(0.866667, 0, 0, 1)
 position = Vector2(91, 89)
 rotation = -2.44346
+emitting = false
 amount = 18
 amount_ratio = 0.9
 process_material = SubResource("ParticleProcessMaterial_0wrc1")
+one_shot = true
 explosiveness = 1.0
 
 [node name="PausePanel" type="Panel" parent="."]

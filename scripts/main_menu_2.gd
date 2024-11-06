@@ -3,6 +3,8 @@ extends Control
 @onready var idle: AnimationPlayer = $AnimationPlayer2
 @onready var button_select: AudioStreamPlayer = $ButtonSelect
 
+var endingCounter = 0
+
 func _ready() -> void:
 	idle.play("idle")
 
@@ -29,3 +31,4 @@ func _on_credit_button_mouse_entered() -> void:
 
 func _on_quit_button_mouse_entered() -> void:
 	button_select.play()
+	

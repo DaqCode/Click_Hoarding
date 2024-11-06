@@ -339,6 +339,25 @@ text = "Click Hoarding"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Thanks" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -367.5
+offset_top = -206.5
+offset_right = 367.5
+offset_bottom = 206.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LongMessage" type="Label" parent="Thanks"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_s8o02")
 volume_db = -4.0
@@ -352,6 +371,7 @@ autoplay = "idle"
 
 [node name="ButtonSelect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_oress")
+volume_db = -10.0
 pitch_scale = 1.25
 
 [connection signal="mouse_entered" from="GridContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
