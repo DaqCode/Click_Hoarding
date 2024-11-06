@@ -30,6 +30,13 @@ extends Control
 @onready var enemy_bite: Timer = $Timers/EnemyBite
 @onready var bite_text: Label = $BiteText
 @onready var amount_lost: Label = $BiteText/AmountLost
+@onready var monster_spawn: AudioStreamPlayer = $SFX/MonsterSpawn
+@onready var monster_death: AudioStreamPlayer = $SFX/MonsterDeath
+@onready var monster_growl: AudioStreamPlayer = $SFX/MonsterGrowl
+@onready var monster_bite: AudioStreamPlayer = $SFX/MonsterBite
+@onready var monster_hit: AudioStreamPlayer = $SFX/MonsterHit
+@onready var monster_killed: AudioStreamPlayer = $SFX/MonsterKilled
+
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -75,7 +82,7 @@ func _ready() -> void:
 	goldenClick.wait_time = randf_range(10, 15)
 	goldenClick.start()
 	
-	enemy_spawn_timer.wait_time = randf_range(5,7)
+	enemy_spawn_timer.wait_time = randf_range(60, 100)
 	enemy_spawn_timer.start()
 	enemy_random_spawn.disabled = true
 	health_bar.visible = false
@@ -345,23 +352,23 @@ func _on_golden_click_pressed() -> void:
 	goldenClickDespawn.wait_time = randf_range(1,2)
 		
 	if  coin_count <= 1000:
-		coin_count += randf_range(250,900)
+		coin_count += randi_range(250,900)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count >= 1000:
-		coin_count += randf_range(1000,2999)
+		coin_count += randi_range(1000,2999)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count >= 10000:
-		coin_count += randf_range(3333,9999)
+		coin_count += randi_range(3333,9999)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 	elif coin_count >= 100000:
-		coin_count += randf_range(33333,99999)
+		coin_count += randi_range(33333,99999)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count > 1000000:
-		coin_count += randf_range(5555555,9999000)
+		coin_count += randi_range(5555555,9999000)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 	else:
@@ -403,6 +410,7 @@ func _on_btmm_pressed() -> void:
 
 func _on_enemy_random_spawn_pressed():
 	enemy_random_spawn.position = Vector2(randf_range(300,500), randf_range(350, 375)) 
+	monster_hit.play()
 	
 	if (!health_bar.value == 1):
 		health_bar.value -=1
@@ -414,58 +422,61 @@ func _on_enemy_random_spawn_pressed():
 		health_bar.value = 5
 		health_bar.visible = false
 		
-		enemy_spawn_timer.wait_time = randf_range(5,7)
+		enemy_spawn_timer.wait_time = randf_range(50, 100)
 		print(enemy_spawn_timer.wait_time)
 		enemy_spawn_timer.start()
 		
 		if coin_count <= 1000:
-			coin_count += randf_range(750,1250)
+			coin_count += randi_range(750,1250)
 			coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 		elif coin_count >= 1000:
-			coin_count += randf_range(5000,8000)
+			coin_count += randi_range(5000,8000)
 			coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 		elif coin_count >= 10000:
-			coin_count += randf_range(9000,30000)
+			coin_count += randi_range(9000,30000)
 			coin.text = "Coins: %s" % format_large_number(coin_count)
 			
 		elif coin_count >= 100000:
-			coin_count += randf_range(33333,99999)
+			coin_count += randi_range(33333,99999)
 			coin.text = "Coins: %s" % format_large_number(coin_count)
 			
 		else:
 			coin_count += 1000
 			coin.text = "Coins: %s" % format_large_number(coin_count)
-			
+		
+		monster_death.play()
+		monster_killed.play()
 		enemy_random_spawn.position = Vector2(-1000,320) 
-		enemy_bite.wait_time = randf_range(4,6)
-	
-	#If it is, die, give coins, and reset the timer for spawning.
-	#Coins given are dependent of how much coins the player has now.
-	pass
-
+		health_bar.value = 5
+		enemy_bite.wait_time = randi_range(3,5)
+		
 
 func _on_enemy_spawn_timer_timeout():
+	monster_spawn.play()
 	enemy_random_spawn.position = Vector2(randf_range(250,950),randf_range(300,400)) 
 	print(enemy_random_spawn.position)
 	health_bar.visible = true
 	enemy_random_spawn.disabled = false
-	enemy_bite.wait_time = randi_range(2,4)
+	enemy_bite.wait_time = randf_range(3,5)
 	enemy_bite.start()
 	
 
 func _on_enemy_bite_timeout() -> void:
 	var randomNumber = randi_range(1,4)
+	var myCoinsNow = 0
 	enemy_random_spawn.disabled = true
 	health_bar.visible = false
 	
-	enemy_spawn_timer.wait_time = randf_range(10, 15)
+	monster_bite.play()
+	
+	enemy_spawn_timer.wait_time = randf_range(25, 60)
 	enemy_spawn_timer.start()
 	
 	print("BiteText Visible")
 	bite_text.visible = true
-	bite_text.rotation = randf_range(-5, 5)
+	bite_text.rotation_degrees = randf_range(-15, 15)
 	
 	match randomNumber:
 		1:
@@ -475,10 +486,34 @@ func _on_enemy_bite_timeout() -> void:
 		3:
 			bite_text.text = "THAT HURT :("
 		
+	if  coin_count <= 1000:
+		myCoinsNow += randi_range(250,300)
 	
-	#match case for bite_text.visible
+	elif coin_count >= 1000:
+		myCoinsNow += randi_range(500,750)
+		
+	elif coin_count >= 10000:
+		myCoinsNow += randi_range(900,1000)
+		
+	elif coin_count >= 100000:
+		myCoinsNow += randi_range(1000,25000)
+	
+	elif coin_count > 1000000:
+		myCoinsNow += randi_range(50000, 100000)
+		
+	else:
+		myCoinsNow += randi_range(500,10000)
+	
+	print(myCoinsNow)
+	if coin_count < myCoinsNow:
+		coin_count = 0
+	else:
+		coin_count -= myCoinsNow
+		
+	amount_lost.text = "You lost %s coins!" % format_large_number(myCoinsNow)
 	#amount_lost = some amount
 	await get_tree().create_timer(3).timeout
 	print("Untrue for timer now get out of here you prick")
 	bite_text.visible = false
 	bite_text.rotation = 0
+	health_bar.value = 5
