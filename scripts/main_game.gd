@@ -36,6 +36,7 @@ extends Control
 @onready var monster_bite: AudioStreamPlayer = $SFX/MonsterBite
 @onready var monster_hit: AudioStreamPlayer = $SFX/MonsterHit
 @onready var monster_killed: AudioStreamPlayer = $SFX/MonsterKilled
+@onready var pixel_blood: GPUParticles2D = $EnemyRandomSpawn/PixelBlood
 
 
 var coin_count: int = 0
@@ -71,7 +72,7 @@ func _ready() -> void:
 	goldenClickButton.disabled = true
 	
 	turretProgress.min_value = 0
-	turretProgress.max_value = 1000000
+	turretProgress.max_value = 100000
 	turretProgress.value = 0
 	
 	multiplier = 1.00
@@ -250,7 +251,7 @@ func _process(_delta):
 	var autoBase = 100
 	var clickUp = round(clickBase + 25.5 * pow(clickLevel, 1.10))
 	var autoUp = round(autoBase + 1000 * pow(autoClickLevel, 1.9))
-	var turretUp = 1000000
+	var turretUp = 100000
 	var clickText = "Upgrade: %d coins" % clickUp
 	var autoText = "Upgrade: %d coins" % autoUp
 
@@ -411,6 +412,7 @@ func _on_btmm_pressed() -> void:
 func _on_enemy_random_spawn_pressed():
 	enemy_random_spawn.position = Vector2(randf_range(300,500), randf_range(350, 375)) 
 	monster_hit.play()
+	pixel_blood.emitting = true
 	
 	if (!health_bar.value == 1):
 		health_bar.value -=1

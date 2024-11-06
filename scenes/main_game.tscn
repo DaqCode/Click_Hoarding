@@ -1639,13 +1639,16 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0wrc1"]
+lifetime_randomness = 0.5
 particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
 direction = Vector3(100, 100, 0)
 spread = 47.05
 initial_velocity_min = 100.0
 initial_velocity_max = 250.0
 gravity = Vector3(0, 180, 0)
-scale_max = 3.0
+scale_max = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61wkl"]
 bg_color = Color(0.427451, 0.819608, 1, 0.878431)
@@ -1905,7 +1908,7 @@ theme_override_constants/shadow_outline_size = 7
 theme_override_fonts/font = ExtResource("8_i4027")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_phgnv")
-text = "Required: 1M"
+text = "Required: 100K"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -1956,6 +1959,7 @@ theme_override_font_sizes/font_size = 48
 text = "+1 Coin!"
 
 [node name="GoldenClick" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 156.0
 offset_top = 245.0
@@ -2065,9 +2069,13 @@ step = 1.0
 value = 5.0
 
 [node name="PixelBlood" type="GPUParticles2D" parent="EnemyRandomSpawn"]
+modulate = Color(0.866667, 0, 0, 1)
 position = Vector2(91, 89)
-rotation = -2.46417
+rotation = -2.44346
+amount = 18
+amount_ratio = 0.9
 process_material = SubResource("ParticleProcessMaterial_0wrc1")
+explosiveness = 1.0
 
 [node name="PausePanel" type="Panel" parent="."]
 visible = false
@@ -2162,6 +2170,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="BiteText" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
