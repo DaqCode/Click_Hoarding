@@ -20,6 +20,7 @@ corner_radius_bottom_left = 5
 corner_detail = 5
 shadow_color = Color(0.658824, 0, 0.176471, 1)
 shadow_size = 1
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyv83"]
 content_margin_left = 4.0
@@ -38,6 +39,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 5
 shadow_size = 1
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y46pu"]
 content_margin_left = 4.0
@@ -55,6 +57,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 5
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjfp6"]
 content_margin_left = 4.0
@@ -73,6 +76,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 5
 shadow_size = 1
+anti_aliasing = false
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0.752941, 1)

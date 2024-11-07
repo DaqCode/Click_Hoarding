@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dohlvyxog5byc"]
+[gd_scene load_steps=27 format=3 uid="uid://dohlvyxog5byc"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_2.gd" id="1_tll1d"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="3_mi4dq"]
 [ext_resource type="Theme" uid="uid://c4vqxejpebeih" path="res://themes/themes/UIButtonTheme.tres" id="4_k63j1"]
+[ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="4_xhh1q"]
 [ext_resource type="AudioStream" uid="uid://chd7v8rxred3b" path="res://resources/sfx/download.mp3" id="5_oress"]
 [ext_resource type="AudioStream" uid="uid://uemvjp15dvu6" path="res://resources/music/mobile-casual-video-game-music-158301.mp3" id="5_s8o02"]
 
@@ -197,6 +198,100 @@ Button/styles/hover = SubResource("StyleBoxFlat_h22vy")
 Button/styles/normal = SubResource("StyleBoxFlat_8ypcc")
 Button/styles/pressed = SubResource("StyleBoxFlat_h22vy")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v615d"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i7371"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxsx8"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.72956, 0.918258, 0.984658, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19103, 0.529477, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlgju"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.546604, 0.828417, 0.993943, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19103, 0.529477, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u108t"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101423, 0.384743, 0.465365, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19103, 0.529477, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_gbqfg"]
+Button/colors/font_color = Color(1, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(1, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 12
+Button/font_sizes/font_size = 55
+Button/fonts/font = ExtResource("4_xhh1q")
+Button/styles/disabled = SubResource("StyleBoxFlat_v615d")
+Button/styles/focus = SubResource("StyleBoxEmpty_i7371")
+Button/styles/hover = SubResource("StyleBoxFlat_mxsx8")
+Button/styles/normal = SubResource("StyleBoxFlat_qlgju")
+Button/styles/pressed = SubResource("StyleBoxFlat_u108t")
+
 [sub_resource type="Animation" id="Animation_pvsid"]
 length = 0.001
 tracks/0/type = "value"
@@ -340,7 +435,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Thanks" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -355,9 +449,49 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LongMessage" type="Label" parent="Thanks"]
-layout_mode = 0
-offset_right = 40.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.5
+offset_right = 69.5
 offset_bottom = 23.0
+grow_horizontal = 2
+text = "Ya beat the game!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Thanks"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -323.0
+offset_top = -111.0
+offset_right = 323.0
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "yap yap yap"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Thanks"]
+layout_mode = 0
+offset_left = 241.5
+offset_top = 269.5
+offset_right = 476.5
+offset_bottom = 386.5
+
+[node name="Button" type="Button" parent="Thanks"]
+layout_mode = 0
+offset_left = 5.5
+offset_top = 6.5
+offset_right = 85.5
+offset_bottom = 82.5
+theme = SubResource("Theme_gbqfg")
+text = "X"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_s8o02")
@@ -381,4 +515,5 @@ pitch_scale = 1.25
 [connection signal="pressed" from="GridContainer/CreditButton" to="." method="_on_credit_button_pressed"]
 [connection signal="mouse_entered" from="GridContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="GridContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Thanks/Button" to="." method="_on_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_animation_player_2_animation_finished"]

@@ -49,6 +49,10 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 7
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 anti_aliasing = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fgmh1"]
@@ -1626,7 +1630,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.8, 0.8, 0.8, 0)
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 7
 corner_radius_top_right = 7
 corner_radius_bottom_right = 7
@@ -1636,6 +1640,8 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0wrc1"]
 lifetime_randomness = 0.5
@@ -1978,14 +1984,13 @@ expand_icon = true
 modulate = Color(0.935732, 0.946346, 0, 1)
 position = Vector2(24, 24)
 rotation = -1.5708
-emitting = false
 amount = 28
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_fgmh1")
 texture = ExtResource("3_cpofu")
-one_shot = true
+lifetime = 4.0
 explosiveness = 1.0
-randomness = 0.7
+randomness = 1.0
 
 [node name="UpgradePFX" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -2071,9 +2076,10 @@ modulate = Color(0.866667, 0, 0, 1)
 position = Vector2(91, 89)
 rotation = -2.44346
 emitting = false
-amount = 18
-amount_ratio = 0.9
+amount = 50
+amount_ratio = 0.4565
 process_material = SubResource("ParticleProcessMaterial_0wrc1")
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 

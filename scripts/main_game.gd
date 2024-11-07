@@ -446,7 +446,7 @@ func _on_btmm_pressed() -> void:
 
 
 func _on_enemy_random_spawn_pressed():
-	enemy_random_spawn.position = Vector2(randf_range(300,500), randf_range(350, 375)) 
+	enemy_random_spawn.position = Vector2(randf_range(300,700), randf_range(300, 400)) 
 	monster_hit.play()
 	pixel_blood.emitting = true
 	
