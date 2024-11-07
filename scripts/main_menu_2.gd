@@ -8,7 +8,7 @@ var endingCounter = 0
 func _ready() -> void:
 	idle.play("idle")
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished() -> void:
 	idle.play("idle")
 
 func _on_play_button_pressed() -> void:

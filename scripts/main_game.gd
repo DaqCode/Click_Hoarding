@@ -37,6 +37,7 @@ extends Control
 @onready var monster_hit: AudioStreamPlayer = $SFX/MonsterHit
 @onready var monster_killed: AudioStreamPlayer = $SFX/MonsterKilled
 @onready var pixel_blood: GPUParticles2D = $EnemyRandomSpawn/PixelBlood
+@onready var music = $Music/Music1
 
 
 var coin_count: int = 0
@@ -52,6 +53,13 @@ var staerieAnimation = preload("res://resources/heat_button_example_1_out.ogv")
 var billyAnimation = preload("res://resources/heat_button_example_2_out.ogv")
 var clownAnimation = preload("res://resources/heat_button_example_3_out.ogv")
 var fishAnimation = preload("res://resources/heat_button_example_4_out.ogv")
+
+#Music Variables
+var MUSIC_1 = preload("res://resources/music/gameMusicforGameScene/music1.mp3")
+var MUSIC_2 = preload("res://resources/music/gameMusicforGameScene/music2.mp3")
+var MUSIC_3 = preload("res://resources/music/gameMusicforGameScene/music3.mp3")
+var MUSIC_4 = preload("res://resources/music/gameMusicforGameScene/coverless-book-lofi-186307.mp3")
+var MUSIC_5 = preload("res://resources/music/gameMusicforGameScene/lofi-chill-melancholic-259764.mp3")
 
 #SFX variables
 var buttonClick = preload("res://resources/sfx/buttonClick.mp3")
@@ -69,6 +77,21 @@ const MENU4 = preload("res://images/menuImage/menu_png_4_test_wtf.png")
 var isIdle: bool = true
 
 func _ready() -> void:
+	
+	var randomMusic = randi_range(1,5)
+	match randomMusic:
+		1:
+			music.set_stream(MUSIC_1)
+		2:
+			music.set_stream(MUSIC_2)
+		3:
+			music.set_stream(MUSIC_3)
+		4:
+			music.set_stream(MUSIC_4)
+		5:
+			music.set_stream(MUSIC_5)
+	
+	music.playing = true
 	goldenClickButton.disabled = true
 	
 	turretProgress.min_value = 0
@@ -112,6 +135,7 @@ func _on_more_click_pressed() -> void:
 		clickUpgrade.disabled = true
 	else:
 		coin_count -= requiredCoins
+		
 		#Problem, might have to just ignore for now..?
 		coin.text = "Coins: %.1f" % format_large_number(coin_count)
 
@@ -124,6 +148,7 @@ func _on_more_click_pressed() -> void:
 		
 		#Problem, might have to just ignore for now..?
 		clickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(requiredCoins)
+		
 		clickUpgrade.disabled = false
 		multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 		upgrade_sfx.play()
@@ -210,6 +235,7 @@ func _on_auto_click_update_pressed() -> void:
 		autoClickLevel += 1
 		autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
 
+		#Needs fixing
 		autoClickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = false
 
@@ -289,7 +315,7 @@ func _on_pause_pressed() -> void:
 	get_tree().paused = true
 	pausePanel.visible = true
 	
-	var randomStatement = randi_range(1,10)
+	var randomStatement = randi_range(1,15)
 	var randomImage = randi_range(1,4)
 	
 	match randomImage:
@@ -326,7 +352,17 @@ func _on_pause_pressed() -> void:
 		9:
 			pauseLabel.text = "Man, being a game developer is kinda hard, but it's fun."
 		10:
-			pauseLabel.text = "ღゝ ◡╹ )ノ♡"
+			pauseLabel.text = "It's hard to balance a game like this so well. How did Cookie Clicker do it, I ponder."
+		11:
+			pauseLabel.text = "Honestly, I'm more preplexed that I managed to do all this. Granted, I know I could have done more."
+		12:
+			pauseLabel.text = "Chip break huh?"
+		13:
+			pauseLabel.text = "Honestly, I'm not even sure if I coded all this right. I just, kinda did it."
+		14:
+			pauseLabel.text = "Hmmmmm... Promotional areas, maybe Youtube or Reddit? You should go check them out?"
+		15:
+			pauseLabel.text = "If you wanna know, there's a secret on the next game I work on if you beat this. Good luck!"
 
 func _on_resume_pressed() -> void:
 	print("Resumed")
@@ -519,3 +555,21 @@ func _on_enemy_bite_timeout() -> void:
 	bite_text.visible = false
 	bite_text.rotation = 0
 	health_bar.value = 5
+
+
+func _on_music_finished():
+	var randomMusic = randi_range(1,5)
+	
+	match randomMusic:
+		1:
+			music.set_stream(MUSIC_1)
+		2:
+			music.set_stream(MUSIC_2)
+		3:
+			music.set_stream(MUSIC_3)
+		4:
+			music.set_stream(MUSIC_4)
+		5:
+			music.set_stream(MUSIC_5)
+	
+	music.playing = true

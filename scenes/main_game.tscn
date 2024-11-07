@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=57 format=4 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -14,7 +14,6 @@
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
 [ext_resource type="Texture2D" uid="uid://doomerwod4iyt" path="res://images/activateclicker.png" id="11_b8mqk"]
 [ext_resource type="Theme" uid="uid://dxfakovs8mtnh" path="res://themes/themes/GoldenClick.tres" id="12_lomsj"]
-[ext_resource type="AudioStream" uid="uid://b3gfxje8gjvc" path="res://resources/music/music1.mp3" id="12_mqcs4"]
 [ext_resource type="AudioStream" uid="uid://c0pbnqwdahrlj" path="res://resources/sfx/powerUp (1).mp3" id="13_2n5l2"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
 [ext_resource type="Texture2D" uid="uid://bagkqkbd78nhg" path="res://images/goldenClick.png" id="15_khtqr"]
@@ -1977,7 +1976,7 @@ expand_icon = true
 
 [node name="GoldenClickPEF" type="GPUParticles2D" parent="GoldenClick"]
 modulate = Color(0.935732, 0.946346, 0, 1)
-position = Vector2(30, 43)
+position = Vector2(24, 24)
 rotation = -1.5708
 emitting = false
 amount = 28
@@ -2289,7 +2288,6 @@ pitch_scale = 0.5
 [node name="Music" type="Node" parent="."]
 
 [node name="Music1" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("12_mqcs4")
 volume_db = -5.0
 autoplay = true
 
@@ -2310,3 +2308,4 @@ autoplay = true
 [connection signal="timeout" from="Timers/BlinkTimerDespawn" to="." method="_on_blink_timer_despawn_timeout"]
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/EnemyBite" to="." method="_on_enemy_bite_timeout"]
+[connection signal="finished" from="Music/Music1" to="." method="_on_music_finished"]
