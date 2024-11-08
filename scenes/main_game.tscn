@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scripts/flying_bird.gd" id="5_4mv6l"]
 [ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
 [ext_resource type="Texture2D" uid="uid://p7j41r6ejmru" path="res://images/pixel.png" id="6_auo8h"]
-[ext_resource type="Texture2D" uid="uid://t4bund1k688x" path="res://images/birb/birb1.png" id="6_s45dj"]
 [ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/themes/progressTheme.tres" id="7_2lu25"]
 [ext_resource type="Texture2D" uid="uid://21fcif2rmckh" path="res://images/turret_repair.png" id="8_4bd6u"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
@@ -28,6 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://20uqnnhgkv22" path="res://resources/sfx/moreSpecificSFX/youtube_JcG_ugrzfHE_audio.mp3" id="22_ujjbt"]
 [ext_resource type="AudioStream" uid="uid://dce448j44414v" path="res://resources/sfx/moreSpecificSFX/super-deep-growl-86749.mp3" id="22_x8bl2"]
 [ext_resource type="AudioStream" uid="uid://8prfu4k2ufwo" path="res://resources/sfx/moreSpecificSFX/youtube_4JvbPx3rtmE_audio.mp3" id="23_jpr60"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hvobf"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_usgyu"]
 particle_flag_disable_z = true
@@ -1723,22 +1724,24 @@ autoplay = true
 
 [node name="FlyingBird" type="Button" parent="."]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 107.0
-offset_right = 117.0
-offset_bottom = 181.187
-theme_override_constants/icon_max_width = 90
+offset_left = -60.0
+offset_top = 100.0
+offset_right = -7.0
+offset_bottom = 141.093
+theme_override_constants/icon_max_width = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hvobf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hvobf")
 icon = ExtResource("4_6s363")
 script = ExtResource("5_4mv6l")
-
-[node name="FlyingHatBird" type="Button" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 202.0
-offset_right = 118.0
-offset_bottom = 256.137
-theme_override_constants/icon_max_width = 90
-icon = ExtResource("6_s45dj")
 
 [node name="RightSide" type="Control" parent="."]
 layout_mode = 1
@@ -2017,7 +2020,7 @@ amount = 28
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_fgmh1")
 texture = ExtResource("3_cpofu")
-lifetime = 4.0
+lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
@@ -2278,6 +2281,10 @@ one_shot = true
 [node name="EnemyBite" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="FlyingTimer" type="Timer" parent="Timers"]
+
+[node name="FlapTimer" type="Timer" parent="Timers"]
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="ButtonClickSFX" type="AudioStreamPlayer" parent="SFX"]
@@ -2345,4 +2352,6 @@ autoplay = true
 [connection signal="timeout" from="Timers/BlinkTimerDespawn" to="." method="_on_blink_timer_despawn_timeout"]
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/EnemyBite" to="." method="_on_enemy_bite_timeout"]
+[connection signal="timeout" from="Timers/FlyingTimer" to="FlyingBird" method="_on_flying_timer_timeout"]
+[connection signal="timeout" from="Timers/FlapTimer" to="FlyingBird" method="_on_flap_timer_timeout"]
 [connection signal="finished" from="Music/Music1" to="." method="_on_music_finished"]
