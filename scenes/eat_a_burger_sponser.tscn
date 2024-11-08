@@ -352,7 +352,7 @@ theme = ExtResource("3_w1ttl")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_vtvqv")
 theme_override_font_sizes/font_size = 50
-text = "Comming in a while..."
+text = "Coming in a while..."
 horizontal_alignment = 1
 vertical_alignment = 1
 

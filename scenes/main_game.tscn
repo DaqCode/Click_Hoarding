@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=60 format=4 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -6,9 +6,12 @@
 [ext_resource type="Theme" uid="uid://gl2r6j7q4xkv" path="res://themes/themes/ButtonThemes.tres" id="2_pbr4b"]
 [ext_resource type="Theme" uid="uid://bmshafa67sq7j" path="res://themes/themes/labelTheme.tres" id="3_303a6"]
 [ext_resource type="Texture2D" uid="uid://dr6ngagif23me" path="res://images/coinHover.png" id="3_cpofu"]
+[ext_resource type="Texture2D" uid="uid://b7o7p7yr2h2s1" path="res://images/birb/birdOne.png" id="4_6s363"]
 [ext_resource type="Texture2D" uid="uid://cvl1fwy8adqvt" path="res://images/clickUpgrade.png" id="4_yj7ng"]
+[ext_resource type="Script" path="res://scripts/flying_bird.gd" id="5_4mv6l"]
 [ext_resource type="Texture2D" uid="uid://c1ssrvqasgbgn" path="res://images/autoClicker.png" id="5_l1c0y"]
 [ext_resource type="Texture2D" uid="uid://p7j41r6ejmru" path="res://images/pixel.png" id="6_auo8h"]
+[ext_resource type="Texture2D" uid="uid://t4bund1k688x" path="res://images/birb/birb1.png" id="6_s45dj"]
 [ext_resource type="Theme" uid="uid://dpkjn51vetxum" path="res://themes/themes/progressTheme.tres" id="7_2lu25"]
 [ext_resource type="Texture2D" uid="uid://21fcif2rmckh" path="res://images/turret_repair.png" id="8_4bd6u"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="8_i4027"]
@@ -1619,17 +1622,23 @@ bg_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evlwx"]
 bg_color = Color(0.657843, 0, 0.244788, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0734879, 0, 0.0101556, 1)
 corner_radius_top_left = 7
 corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22l35"]
 bg_color = Color(3.82639e-06, 0.657962, 1.15514e-06, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 7
 corner_radius_top_right = 7
@@ -1711,6 +1720,25 @@ offset_bottom = 443.24
 scale = Vector2(0.6, 0.6)
 stream = ExtResource("2_ci6ye")
 autoplay = true
+
+[node name="FlyingBird" type="Button" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 107.0
+offset_right = 117.0
+offset_bottom = 181.187
+theme_override_constants/icon_max_width = 90
+icon = ExtResource("4_6s363")
+script = ExtResource("5_4mv6l")
+
+[node name="FlyingHatBird" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 202.0
+offset_right = 118.0
+offset_bottom = 256.137
+theme_override_constants/icon_max_width = 90
+icon = ExtResource("6_s45dj")
 
 [node name="RightSide" type="Control" parent="."]
 layout_mode = 1
@@ -1984,11 +2012,13 @@ expand_icon = true
 modulate = Color(0.935732, 0.946346, 0, 1)
 position = Vector2(24, 24)
 rotation = -1.5708
+emitting = false
 amount = 28
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_fgmh1")
 texture = ExtResource("3_cpofu")
 lifetime = 4.0
+one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 
@@ -2009,7 +2039,7 @@ randomness = 1.0
 
 [node name="Pause" type="Button" parent="."]
 layout_mode = 0
-offset_left = 15.0
+offset_left = 16.0
 offset_top = 15.0
 offset_right = 75.0
 offset_bottom = 77.0
@@ -2069,7 +2099,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_evlwx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_22l35")
 max_value = 5.0
 step = 1.0
-value = 5.0
+value = 2.0
+rounded = true
 
 [node name="PixelBlood" type="GPUParticles2D" parent="EnemyRandomSpawn"]
 modulate = Color(0.866667, 0, 0, 1)

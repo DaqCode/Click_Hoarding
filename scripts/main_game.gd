@@ -389,15 +389,15 @@ func _on_golden_click_pressed() -> void:
 	goldenClickDespawn.wait_time = randf_range(1,2)
 		
 	if  coin_count <= 1000:
-		coin_count += randi_range(250,900)
+		coin_count += randi_range(750,900)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count >= 1000:
-		coin_count += randi_range(1000,2999)
+		coin_count += randi_range(5000,7500)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count >= 10000:
-		coin_count += randi_range(3333,9999)
+		coin_count += randi_range(10000,15000)
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 	elif coin_count >= 100000:
@@ -492,9 +492,15 @@ func _on_enemy_random_spawn_pressed():
 		
 
 func _on_enemy_spawn_timer_timeout():
+	var random_health = randi_range(5,10)
+	health_bar.max_value = random_health
+	health_bar.value = random_health
+	
+	print (random_health)
+	
 	monster_spawn.play()
 	enemy_random_spawn.position = Vector2(randf_range(250,950),randf_range(300,400)) 
-	print(enemy_random_spawn.position)
+	
 	health_bar.visible = true
 	enemy_random_spawn.disabled = false
 	enemy_bite.wait_time = randf_range(3,5)
