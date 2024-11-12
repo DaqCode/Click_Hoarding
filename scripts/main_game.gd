@@ -37,8 +37,8 @@ extends Control
 @onready var monster_hit: AudioStreamPlayer = $SFX/MonsterHit
 @onready var monster_killed: AudioStreamPlayer = $SFX/MonsterKilled
 @onready var pixel_blood: GPUParticles2D = $EnemyRandomSpawn/PixelBlood
-@onready var music = $Music/Music1
-
+@onready var music: AudioStreamPlayer = $Music/Music1
+@onready var music2: AudioStreamPlayer = $Music/PauseMenu
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -363,9 +363,11 @@ func _on_pause_pressed() -> void:
 			pauseLabel.text = "Hmmmmm... Promotional areas, maybe Youtube or Reddit? You should go check them out?"
 		15:
 			pauseLabel.text = "If you wanna know, there's a secret on the next game I work on if you beat this. Good luck!"
+	
+	music2.playing = true
 
 func _on_resume_pressed() -> void:
-	print("Resumed")
+	music2.playing = false
 	get_tree().paused = false
 	pausePanel.visible = false
 
@@ -488,7 +490,7 @@ func _on_enemy_random_spawn_pressed():
 		monster_killed.play()
 		enemy_random_spawn.position = Vector2(-1000,320) 
 		health_bar.value = 5
-		enemy_bite.wait_time = randi_range(3,5)
+		enemy_bite.wait_time = randi_range(5,7)
 		
 
 func _on_enemy_spawn_timer_timeout():
@@ -503,7 +505,7 @@ func _on_enemy_spawn_timer_timeout():
 	
 	health_bar.visible = true
 	enemy_random_spawn.disabled = false
-	enemy_bite.wait_time = randf_range(3,5)
+	enemy_bite.wait_time = randf_range(5,7)
 	enemy_bite.start()
 	
 
@@ -531,16 +533,16 @@ func _on_enemy_bite_timeout() -> void:
 			bite_text.text = "THAT HURT :("
 		
 	if  coin_count <= 1000:
-		myCoinsNow += randi_range(250,300)
+		myCoinsNow += randi_range(500,780)
 	
 	elif coin_count >= 1000:
-		myCoinsNow += randi_range(500,750)
+		myCoinsNow += randi_range(900,2000)
 		
 	elif coin_count >= 10000:
-		myCoinsNow += randi_range(900,1000)
+		myCoinsNow += randi_range(2000,9000)
 		
 	elif coin_count >= 100000:
-		myCoinsNow += randi_range(1000,25000)
+		myCoinsNow += randi_range(10000,75000)
 	
 	elif coin_count > 1000000:
 		myCoinsNow += randi_range(50000, 100000)

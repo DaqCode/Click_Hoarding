@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=61 format=4 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -28,7 +28,6 @@
 [ext_resource type="AudioStream" uid="uid://dce448j44414v" path="res://resources/sfx/moreSpecificSFX/super-deep-growl-86749.mp3" id="22_x8bl2"]
 [ext_resource type="AudioStream" uid="uid://8prfu4k2ufwo" path="res://resources/sfx/moreSpecificSFX/youtube_4JvbPx3rtmE_audio.mp3" id="23_jpr60"]
 [ext_resource type="AudioStream" uid="uid://cupu0spkqbotp" path="res://resources/sfx/monkey.mp3" id="28_7mj5r"]
-[ext_resource type="AudioStream" uid="uid://b6cfvm3n2l3st" path="res://resources/music/elevator-music-bossa-nova-background-music-version-60s-10900.mp3" id="29_rv8p6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hvobf"]
 
@@ -1726,9 +1725,9 @@ autoplay = true
 
 [node name="FlyingBird" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1203.0
+offset_left = -50.0
 offset_top = 60.0
-offset_right = 1256.0
+offset_right = 3.0
 offset_bottom = 101.093
 theme_override_constants/icon_max_width = 45
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hvobf")
@@ -2332,7 +2331,6 @@ volume_db = -5.0
 pitch_scale = 0.5
 
 [node name="BirdChips" type="AudioStreamPlayer" parent="SFX"]
-unique_name_in_owner = true
 stream = ExtResource("28_7mj5r")
 
 [node name="Music" type="Node" parent="."]
@@ -2340,10 +2338,6 @@ stream = ExtResource("28_7mj5r")
 [node name="Music1" type="AudioStreamPlayer" parent="Music"]
 volume_db = -5.0
 autoplay = true
-
-[node name="PauseMenu" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("29_rv8p6")
-volume_db = -5.0
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="pressed" from="FlyingBird" to="FlyingBird" method="_on_pressed"]
