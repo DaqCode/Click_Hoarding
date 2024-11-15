@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=64 format=4 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -20,6 +20,7 @@
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
 [ext_resource type="Texture2D" uid="uid://bagkqkbd78nhg" path="res://images/goldenClick.png" id="15_khtqr"]
 [ext_resource type="Texture2D" uid="uid://eiwkjm5vq0so" path="res://images/overtrulent_enemety.png" id="17_u7vcn"]
+[ext_resource type="Texture2D" uid="uid://dxhr13nqjwhcu" path="res://images/upgrade.png" id="18_uba15"]
 [ext_resource type="Texture2D" uid="uid://co0gal04638fk" path="res://images/menuImage/menu_png_1_test.png" id="18_xkqxq"]
 [ext_resource type="AudioStream" uid="uid://dkg4teq2stmmx" path="res://resources/sfx/powerUp.mp3" id="19_skst1"]
 [ext_resource type="AudioStream" uid="uid://44jaw7ithngj" path="res://resources/sfx/moreSpecificSFX/creature-or-monster-growl-sound-effect-1-239698.mp3" id="21_1gklc"]
@@ -82,6 +83,19 @@ scale_min = 0.5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gw4kq"]
 load_path = "res://.godot/imported/upgrade.png-37b29914991734ea2a37d991d6e2b019.ctex"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_idsrh"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 250, 0)
+scale_min = 0.25
+scale_max = 0.75
+scale_over_velocity_max = 100.0
+color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr30s"]
 content_margin_left = 4.0
@@ -2042,6 +2056,19 @@ one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 
+[node name="AutoUpgradePFX" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(863, 629)
+rotation = -1.56968
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_idsrh")
+texture = ExtResource("18_uba15")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+
 [node name="Pause" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
@@ -2343,7 +2370,7 @@ autoplay = true
 
 [node name="PauseMenu" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("29_rv8p6")
-volume_db = -5.0
+volume_db = -10.0
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="pressed" from="FlyingBird" to="FlyingBird" method="_on_pressed"]

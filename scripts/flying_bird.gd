@@ -72,7 +72,7 @@ func _on_flap_timer_timeout() -> void:
 			flap_timer.wait_time = randf_range(0.1,0.4)
 			flap_timer.start()
 
-
+	
 func _on_pressed() -> void:
 	match whichBird:
 		1:

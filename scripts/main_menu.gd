@@ -14,7 +14,14 @@ func _on_animation_player_animation_finished(_anim_name) -> void:
 	animation_player_2.play()
 
 func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/intro_scene.tscn")
+	if Global.has_visited_scene("intro_scene"):  # Corrected function name
+		get_tree().change_scene_to_file("res://scenes/main_game.tscn")
+		print("Saw animation 2")
+	else:
+		get_tree().change_scene_to_file("res://scenes/intro_scene.tscn")
+		Global.mark_scene_as_visited("intro_scene")  # Mark it as visited the first time
+		print("NO YOU DIDN'T SEE 2")
+
 
 
 func _on_quit_button_pressed() -> void:

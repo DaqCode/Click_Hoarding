@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dohlvyxog5byc"]
+[gd_scene load_steps=28 format=3 uid="uid://dohlvyxog5byc"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_2.gd" id="1_tll1d"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="3_mi4dq"]
@@ -198,6 +198,20 @@ Button/styles/hover = SubResource("StyleBoxFlat_h22vy")
 Button/styles/normal = SubResource("StyleBoxFlat_8ypcc")
 Button/styles/pressed = SubResource("StyleBoxFlat_h22vy")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yuml"]
+bg_color = Color(0.509804, 0.839216, 0.976471, 0.807843)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.341309, 0.770097, 1, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+corner_detail = 20
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v615d"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -218,10 +232,10 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(0.72956, 0.918258, 0.984658, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.19103, 0.529477, 1, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -235,11 +249,11 @@ content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-bg_color = Color(0.546604, 0.828417, 0.993943, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color(0.377033, 0.768361, 0.981201, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.19103, 0.529477, 1, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -254,10 +268,10 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(0.101423, 0.384743, 0.465365, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.19103, 0.529477, 1, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -447,49 +461,70 @@ offset_right = 367.5
 offset_bottom = 206.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4yuml")
 
-[node name="LongMessage" type="Label" parent="Thanks"]
+[node name="Beaten" type="Label" parent="Thanks"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -69.5
-offset_right = 69.5
-offset_bottom = 23.0
+offset_left = -249.5
+offset_top = 20.5
+offset_right = 249.5
+offset_bottom = 67.5
 grow_horizontal = 2
-text = "Ya beat the game!"
+theme_override_colors/font_color = Color(0, 0.449813, 0.727295, 1)
+theme_override_colors/font_outline_color = Color(0.703567, 0.808609, 1, 1)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_xhh1q")
+theme_override_font_sizes/font_size = 38
+text = "Good job! You beat the game!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="Thanks"]
+[node name="LongMessages" type="Label" parent="Thanks"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -323.0
-offset_top = -111.0
-offset_right = 323.0
-offset_bottom = 111.0
+offset_left = -344.0
+offset_top = -135.0
+offset_right = 345.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "yap yap yap"
+theme_override_colors/font_color = Color(0, 0.363591, 0.670123, 1)
+theme_override_colors/font_outline_color = Color(0.573462, 0.852037, 0.997427, 1)
+theme_override_constants/line_spacing = 5
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_xhh1q")
+theme_override_font_sizes/font_size = 23
+text = "Well, you beat the game
+Thank you for playing.
+Another game is in the making. If you'd want to know more about it:
+ you won't
+:)
+Toodles."
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="Thanks"]
 layout_mode = 0
 offset_left = 241.5
-offset_top = 269.5
+offset_top = 281.5
 offset_right = 476.5
-offset_bottom = 386.5
+offset_bottom = 398.5
 
 [node name="Button" type="Button" parent="Thanks"]
-layout_mode = 0
-offset_left = 5.5
-offset_top = 6.5
-offset_right = 85.5
-offset_bottom = 82.5
+layout_mode = 1
+offset_left = 9.5
+offset_top = 9.5
+offset_right = 89.5
+offset_bottom = 85.5
 theme = SubResource("Theme_gbqfg")
 text = "X"
 

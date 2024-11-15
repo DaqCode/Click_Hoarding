@@ -39,6 +39,7 @@ extends Control
 @onready var pixel_blood: GPUParticles2D = $EnemyRandomSpawn/PixelBlood
 @onready var music: AudioStreamPlayer = $Music/Music1
 @onready var music2: AudioStreamPlayer = $Music/PauseMenu
+@onready var autoUpgrade: GPUParticles2D = %AutoUpgradePFX
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -131,13 +132,14 @@ func _on_more_click_pressed() -> void:
 	var requiredCoins = round(baseCost + 25.5 * pow(clickLevel, 1.10))
 
 	if coin_count < requiredCoins:
-		clickUpgrade.text = "Required: %.1f coins" % format_large_number(requiredCoins)
+		clickUpgrade.text = "Required: %s coins" % format_large_number(requiredCoins)
 		clickUpgrade.disabled = true
 	else:
 		coin_count -= requiredCoins
 		
-		#Problem, might have to just ignore for now..?
-		coin.text = "Coins: %.1f" % format_large_number(coin_count)
+		# Update the coin text using the formatted large number
+		coin.text = "Coins: %s" % format_large_number(coin_count)
+
 
 		# Increment the level and update the multiplier
 		clickLevel += 1
@@ -147,7 +149,7 @@ func _on_more_click_pressed() -> void:
 		requiredCoins = round(baseCost + 10.59 * pow(clickLevel, 1.10))
 		
 		#Problem, might have to just ignore for now..?
-		clickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(requiredCoins)
+		clickUpgrade.text = "Upgrade: %s coins" % format_large_number(requiredCoins)
 		
 		clickUpgrade.disabled = false
 		multiplierLabel.text = "Multiplier: %.2f x" % multiplier
@@ -226,7 +228,7 @@ func _on_auto_click_update_pressed() -> void:
 	print("Upgrade for %d" % autoUp)
 
 	if coin_count < autoUp:
-		autoClickUpgrade.text = "Required: %.1f coins" % format_large_number(autoUp)
+		autoClickUpgrade.text = "Required: %s coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = true
 	else:
 		coin_count -= autoUp
@@ -234,13 +236,15 @@ func _on_auto_click_update_pressed() -> void:
 
 		autoClickLevel += 1
 		autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
+		autoUpgrade.emitting = true
+		upgrade_sfx.play()
 
 		#Needs fixing
-		autoClickUpgrade.text = "Upgrade: %.1f coins" % format_large_number(autoUp)
+		autoClickUpgrade.text = "Upgrade: %s coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = false
 
 		# Decrease the interval for the autoclicker based on autoClickLevel
-		autoclick.wait_time = max(0.01, 1.0 / autoClickLevel * 2) # Minimum time interval of 0.1 seconds
+		autoclick.wait_time = max(0.01, 1.0 / autoClickLevel * 2)
 		print("AutoClick Level: %d, Interval: %.2f seconds" % [autoClickLevel, autoclick.wait_time])
 
 # When time expires, repeat to _on_auto_click_pressed
@@ -274,12 +278,12 @@ func _on_video_stream_player_finished() -> void:
 # Should update every time.
 func _process(_delta):
 	var clickBase = 10
-	var autoBase = 100
+	var baseCost = 10
 	var clickUp = round(clickBase + 25.5 * pow(clickLevel, 1.10))
-	var autoUp = round(autoBase + 1000 * pow(autoClickLevel, 1.9))
+	var autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
 	var turretUp = 100000
-	var clickText = "Upgrade: %d coins" % clickUp
-	var autoText = "Upgrade: %d coins" % autoUp
+	var clickText = "Upgrade: %s coins" % format_large_number(clickUp)
+	var autoText = "Upgrade: %s coins" % format_large_number(autoUp)
 
 	# Update the coin text using the formatted large number
 	coin.text = "Coins: %.s" % format_large_number(coin_count)
@@ -360,7 +364,7 @@ func _on_pause_pressed() -> void:
 		13:
 			pauseLabel.text = "Honestly, I'm not even sure if I coded all this right. I just, kinda did it."
 		14:
-			pauseLabel.text = "Hmmmmm... Promotional areas, maybe Youtube or Reddit? You should go check them out?"
+			pauseLabel.text = "Hmmmmm... Promotional areas, maybe Youtube or Reddit? You should go check them out."
 		15:
 			pauseLabel.text = "If you wanna know, there's a secret on the next game I work on if you beat this. Good luck!"
 	
