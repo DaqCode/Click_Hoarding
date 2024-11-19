@@ -19,7 +19,7 @@ func _on_play_button_pressed() -> void:
 		print("Saw animation 2")
 	else:
 		get_tree().change_scene_to_file("res://scenes/intro_scene.tscn")
-		Global.mark_scene_as_visited("intro_scene")  # Mark it as visited the first time
+		Global.mark_scene_visited("intro_scene")  # Mark it as visited the first time
 		print("NO YOU DIDN'T SEE 2")
 
 

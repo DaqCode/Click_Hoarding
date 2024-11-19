@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://dohlvyxog5byc"]
+[gd_scene load_steps=29 format=3 uid="uid://dohlvyxog5byc"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_2.gd" id="1_tll1d"]
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="3_mi4dq"]
 [ext_resource type="Theme" uid="uid://c4vqxejpebeih" path="res://themes/themes/UIButtonTheme.tres" id="4_k63j1"]
 [ext_resource type="FontFile" uid="uid://d3q3o6kvubpq6" path="res://themes/fonts/Fredoka-Regular.ttf" id="4_xhh1q"]
+[ext_resource type="Texture2D" uid="uid://dy4gpukcba88k" path="res://images/heast_thumbs_up.png" id="5_8by7j"]
 [ext_resource type="AudioStream" uid="uid://chd7v8rxred3b" path="res://resources/sfx/download.mp3" id="5_oress"]
 [ext_resource type="AudioStream" uid="uid://uemvjp15dvu6" path="res://resources/music/mobile-casual-video-game-music-158301.mp3" id="5_s8o02"]
 
@@ -512,12 +513,21 @@ Toodles."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="Thanks"]
-layout_mode = 0
-offset_left = 241.5
-offset_top = 281.5
-offset_right = 476.5
-offset_bottom = 398.5
+[node name="ColorRect" type="TextureRect" parent="Thanks"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -153.5
+offset_right = 115.0
+offset_bottom = -15.5
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_8by7j")
+expand_mode = 1
 
 [node name="Button" type="Button" parent="Thanks"]
 layout_mode = 1

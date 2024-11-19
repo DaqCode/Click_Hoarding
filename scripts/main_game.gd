@@ -1,3 +1,4 @@
+class_name MainGame
 extends Control
 
 @onready var coin: Label = $RightSide/CoinLabel
@@ -75,10 +76,14 @@ const MENU2 = preload("res://images/menuImage/menu_png_2_test.png")
 const MENU3 = preload("res://images/menuImage/menu_png_3_test.png")
 const MENU4 = preload("res://images/menuImage/menu_png_4_test_wtf.png")
 
+# Constants for multiplier growth
+var multiplier_cap = 10.0 # Maximum multiplier growth cap
+var growth_rate = 5.0 # Determines how fast the multiplier tapers off
+
 var isIdle: bool = true
 
 func _ready() -> void:
-	
+
 	var randomMusic = randi_range(1,5)
 	match randomMusic:
 		1:
@@ -104,7 +109,7 @@ func _ready() -> void:
 	
 	timeInt.text = "Click: %.1f" % 1.00
 	
-	goldenClick.wait_time = randf_range(10, 15)
+	goldenClick.wait_time = randf_range(30, 50)
 	goldenClick.start()
 	
 	enemy_spawn_timer.wait_time = randf_range(5, 6)
@@ -126,37 +131,38 @@ func format_large_number(value: int) -> String:
 
 
 # Clicking upgrade Function
-# Maybe use the following formula? Multiplier = round(1 + 1.00 * pow(clickLevel, 1.10))
 func _on_more_click_pressed() -> void:
 	var baseCost = 10
-	var requiredCoins = round(baseCost + 25.5 * pow(clickLevel, 1.10))
+	# Adjusted formula for required coins
+	var requiredCoins = round(baseCost + 25 * pow(clickLevel, 1.05))
 
 	if coin_count < requiredCoins:
 		clickUpgrade.text = "Required: %s coins" % format_large_number(requiredCoins)
 		clickUpgrade.disabled = true
 	else:
 		coin_count -= requiredCoins
-		
-		# Update the coin text using the formatted large number
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 
-
-		# Increment the level and update the multiplier
+		# Increment click level
 		clickLevel += 1
-		multiplier = 1 + 0.05 * pow(clickLevel, 1.07)
 
-		# Recalculate the new requiredCoins for the next level
-		requiredCoins = round(baseCost + 10.59 * pow(clickLevel, 1.10))
-		
-		#Problem, might have to just ignore for now..?
+		# Multiplier calculation using logarithmic growth
+		multiplier = 1 + (log(clickLevel + 1) ** 1.5) / growth_rate + (clickLevel ** 1.2) / (growth_rate * 2)
+
+
+		# OR: Multiplier using asymptotic growth
+		# multiplier = 1 + (multiplier_cap * clickLevel) / (clickLevel + growth_rate)
+
+		# Recalculate the required coins for the next upgrade level
+		requiredCoins = round(baseCost + 25 * pow(clickLevel, 1.05))
 		clickUpgrade.text = "Upgrade: %s coins" % format_large_number(requiredCoins)
-		
 		clickUpgrade.disabled = false
 		multiplierLabel.text = "Multiplier: %.2f x" % multiplier
 		upgrade_sfx.play()
 		upgrade_pfx.emitting = true
-	print(requiredCoins)
-	print(multiplier)
+
+	print("Multiplier: %.2f" % multiplier)
+
 
 # Clicking on the money generator
 func _on_button_pressed() -> void:
@@ -220,10 +226,11 @@ func autoButtonUse() -> void:
 		autobutton.text = "Auto Click: Off!"
 
 
-# Clicking on button to shorten/upgrade the autoclicker 
+# Auto Click Upgrade Function
 func _on_auto_click_update_pressed() -> void:
 	var baseCost = 100
-	var autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
+	# Adjusted formula for auto click upgrade cost
+	var autoUp = round(baseCost + 500 * pow(autoClickLevel, 1.5))
 
 	print("Upgrade for %d" % autoUp)
 
@@ -234,12 +241,13 @@ func _on_auto_click_update_pressed() -> void:
 		coin_count -= autoUp
 		coin.text = "Coins: %s" % format_large_number(coin_count)
 
+		# Increment auto click level
 		autoClickLevel += 1
-		autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
+		autoUp = round(baseCost + 500 * pow(autoClickLevel, 1.5))
 		autoUpgrade.emitting = true
 		upgrade_sfx.play()
 
-		#Needs fixing
+		# Update auto click upgrade text
 		autoClickUpgrade.text = "Upgrade: %s coins" % format_large_number(autoUp)
 		autoClickUpgrade.disabled = false
 
@@ -275,18 +283,17 @@ func _on_video_stream_player_finished() -> void:
 		video_player.play()
 
 
-# Should update every time.
+# Progress Update (for cost and multiplier updates)
 func _process(_delta):
 	var clickBase = 10
 	var baseCost = 10
-	var clickUp = round(clickBase + 25.5 * pow(clickLevel, 1.10))
-	var autoUp = round(baseCost + 1000 * pow(autoClickLevel, 1.9))
+	# Adjusted click upgrade cost formula
+	var clickUp = round(clickBase + 25 * pow(clickLevel, 1.05))
+	var autoUp = round(baseCost + 500 * pow(autoClickLevel, 1.5))
 	var turretUp = 100000
+
 	var clickText = "Upgrade: %s coins" % format_large_number(clickUp)
 	var autoText = "Upgrade: %s coins" % format_large_number(autoUp)
-
-	# Update the coin text using the formatted large number
-	coin.text = "Coins: %.s" % format_large_number(coin_count)
 
 	# Update the progress bar based on the coin count
 	turretProgress.value = coin_count
@@ -313,7 +320,8 @@ func _process(_delta):
 		repairTurrent.text = "Purchase!"
 		repairTurrent.disabled = false
 
-	timeInt.text = "Click: %.2f" % autoclick.wait_time 
+	# Display the autoclick interval
+	timeInt.text = "Click: %.2f" % autoclick.wait_time
 
 func _on_pause_pressed() -> void:
 	get_tree().paused = true
@@ -376,7 +384,7 @@ func _on_resume_pressed() -> void:
 	pausePanel.visible = false
 
 func _on_golden_click_timeout() -> void:
-	goldenClick.wait_time = randf_range(10, 12)
+	goldenClick.wait_time = randf_range(30, 50)
 
 	goldenClickButton.disabled = false
 	goldenClickButton.position = Vector2(randf_range(30.0, 500.0), randf_range(110.0, 548.0))
@@ -386,13 +394,13 @@ func _on_golden_click_timeout() -> void:
 	goldenClickSFX.play()
 	await get_tree().create_timer(0.5).timeout
 	goldenClickDespawn.paused = false
-	goldenClickDespawn.wait_time = randf_range(1,2)
+	goldenClickDespawn.wait_time = randf_range(2,4)
 	goldenClickDespawn.start()
 	print("Golden YEAH CLICK %f" % goldenClickDespawn.wait_time)
 
 func _on_golden_click_pressed() -> void:
 	goldenClickDespawn.paused = true
-	goldenClickDespawn.wait_time = randf_range(1,2)
+	goldenClickDespawn.wait_time = randf_range(2,4)
 		
 	if  coin_count <= 1000:
 		coin_count += randi_range(750,900)
@@ -426,7 +434,7 @@ func _on_golden_click_pressed() -> void:
 	goldenClickSFX.pitch_scale = 1.2
 	goldenClickSFX.play()
 
-	goldenClick.wait_time = randf_range(10, 15)
+	goldenClick.wait_time = randf_range(10, 25)
 	goldenClick.start()
 
 func _on_repair_click_pressed() -> void:
@@ -441,7 +449,7 @@ func _on_blink_timer_despawn_timeout() -> void:
 	
 	goldenClickButton.disabled = true
 	print("despawned")
-	goldenClick.wait_time = randf_range(10,15)
+	goldenClick.wait_time = randf_range(30, 75)
 	goldenClick.start()
 	print("Respawn for %f" % goldenClick.wait_time)
 
@@ -460,6 +468,7 @@ func _on_enemy_random_spawn_pressed():
 		health_bar.value -=1
 	else:
 		print("enemy died")
+		enemy_random_spawn.position = Vector2(-200,-200)
 		enemy_bite.stop()
 		
 		enemy_random_spawn.disabled = true
@@ -514,6 +523,7 @@ func _on_enemy_spawn_timer_timeout():
 	
 
 func _on_enemy_bite_timeout() -> void:
+	enemy_random_spawn.position = Vector2(-200,-200)
 	var randomNumber = randi_range(1,4)
 	var myCoinsNow = 0
 	enemy_random_spawn.disabled = true
@@ -559,6 +569,8 @@ func _on_enemy_bite_timeout() -> void:
 		coin_count = 0
 	else:
 		coin_count -= myCoinsNow
+	
+	coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 	amount_lost.text = "You lost %s coins!" % format_large_number(myCoinsNow)
 	#amount_lost = some amount
