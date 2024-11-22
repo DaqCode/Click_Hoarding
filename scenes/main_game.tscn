@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://d80v70kl8ijn"]
+[gd_scene load_steps=66 format=4 uid="uid://d80v70kl8ijn"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_ot4l6"]
 [ext_resource type="VideoStream" path="res://resources/heat_button_start_heat_idle_out.ogv" id="2_ci6ye"]
@@ -20,6 +20,7 @@
 [ext_resource type="FontFile" uid="uid://oks2upbtg6pg" path="res://themes/fonts/GamestationDisplay-zexG.otf" id="13_mn0kx"]
 [ext_resource type="Texture2D" uid="uid://bagkqkbd78nhg" path="res://images/goldenClick.png" id="15_khtqr"]
 [ext_resource type="Texture2D" uid="uid://eiwkjm5vq0so" path="res://images/overtrulent_enemety.png" id="17_u7vcn"]
+[ext_resource type="Texture2D" uid="uid://cyyjwknq3o7vi" path="res://images/clickMe.png" id="18_ntaep"]
 [ext_resource type="Texture2D" uid="uid://dxhr13nqjwhcu" path="res://images/upgrade.png" id="18_uba15"]
 [ext_resource type="Texture2D" uid="uid://co0gal04638fk" path="res://images/menuImage/menu_png_1_test.png" id="18_xkqxq"]
 [ext_resource type="AudioStream" uid="uid://dkg4teq2stmmx" path="res://resources/sfx/powerUp.mp3" id="19_skst1"]
@@ -27,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://bp0gfkkahkd3e" path="res://resources/sfx/moreSpecificSFX/monster-211717.mp3" id="22_ilyyn"]
 [ext_resource type="AudioStream" uid="uid://20uqnnhgkv22" path="res://resources/sfx/moreSpecificSFX/youtube_JcG_ugrzfHE_audio.mp3" id="22_ujjbt"]
 [ext_resource type="AudioStream" uid="uid://dce448j44414v" path="res://resources/sfx/moreSpecificSFX/super-deep-growl-86749.mp3" id="22_x8bl2"]
+[ext_resource type="AudioStream" uid="uid://cr55wvbgces31" path="res://resources/sfx/buttonClick.mp3" id="23_dmbxk"]
 [ext_resource type="AudioStream" uid="uid://8prfu4k2ufwo" path="res://resources/sfx/moreSpecificSFX/youtube_4JvbPx3rtmE_audio.mp3" id="23_jpr60"]
 [ext_resource type="AudioStream" uid="uid://cupu0spkqbotp" path="res://resources/sfx/monkey.mp3" id="28_7mj5r"]
 [ext_resource type="AudioStream" uid="uid://b6cfvm3n2l3st" path="res://resources/music/elevator-music-bossa-nova-background-music-version-60s-10900.mp3" id="29_rv8p6"]
@@ -1744,6 +1746,7 @@ offset_left = 1203.0
 offset_top = 60.0
 offset_right = 1256.0
 offset_bottom = 101.093
+focus_mode = 0
 theme_override_constants/icon_max_width = 45
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hvobf")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_hvobf")
@@ -1782,6 +1785,7 @@ offset_right = 189.5
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_constants/icon_max_width = 75
 theme_override_icons/icon = ExtResource("3_cpofu")
@@ -1817,7 +1821,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 48
-text = "Coins:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1843,6 +1846,7 @@ unique_name_in_owner = true
 texture_filter = 1
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_constants/h_separation = -1
 theme_override_constants/icon_max_width = 45
@@ -1855,6 +1859,7 @@ unique_name_in_owner = true
 process_mode = 3
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_constants/icon_max_width = 45
 toggle_mode = true
@@ -1866,6 +1871,7 @@ autowrap_mode = 2
 [node name="RepairClick" type="Button" parent="RightSide/GridContainer"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_constants/icon_max_width = 55
 text = "Repair
@@ -1971,6 +1977,7 @@ offset_left = 149.0
 offset_top = 560.0
 offset_right = 319.0
 offset_bottom = 627.0
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_constants/icon_max_width = 45
 text = "Shorter Click"
@@ -2012,10 +2019,11 @@ text = "+1 Coin!"
 
 [node name="GoldenClick" type="Button" parent="."]
 layout_mode = 0
-offset_left = 156.0
-offset_top = 245.0
-offset_right = 202.0
-offset_bottom = 291.0
+offset_left = -172.0
+offset_top = 240.0
+offset_right = -126.0
+offset_bottom = 286.0
+focus_mode = 0
 theme = ExtResource("12_lomsj")
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_pressed_color = Color(0.666569, 0.666569, 0.666569, 1)
@@ -2092,6 +2100,7 @@ offset_left = -198.0
 offset_top = 637.0
 offset_right = -1164.0
 offset_bottom = 167.0
+focus_mode = 0
 theme = SubResource("Theme_q4jft")
 theme_override_icons/icon = ExtResource("17_u7vcn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_8kd3v")
@@ -2146,6 +2155,10 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 
+[node name="ClickMe" type="Sprite2D" parent="EnemyRandomSpawn"]
+position = Vector2(35, 13)
+texture = ExtResource("18_ntaep")
+
 [node name="PausePanel" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -2193,6 +2206,7 @@ offset_right = -32.5
 offset_bottom = -32.5
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_font_sizes/font_size = 48
 text = "Resume"
@@ -2208,6 +2222,7 @@ offset_top = -122.5
 offset_right = 216.5
 offset_bottom = -31.5
 grow_vertical = 0
+focus_mode = 0
 theme = ExtResource("2_pbr4b")
 theme_override_font_sizes/font_size = 35
 text = "Main Menu"
@@ -2317,7 +2332,9 @@ one_shot = true
 [node name="SFX" type="Node" parent="."]
 
 [node name="ButtonClickSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("23_dmbxk")
 volume_db = -10.0
+pitch_scale = 1.2
 
 [node name="GoldenClickAppear" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("13_2n5l2")

@@ -26,11 +26,11 @@ func _ready()-> void:
 
 	whichBird = randi_range(1,2)
 
-	flying_timer.wait_time = randf_range(4,10)
+	flying_timer.wait_time = randf_range(150,300)
 	print(flying_timer.wait_time)
 	flying_timer.start()
 
-	flap_timer.wait_time = randf_range(0.1,0.4)
+	flap_timer.wait_time = randf_range(0.1,0.2)
 	flap_timer.start()
 		
 func _process(delta) -> void:
@@ -40,7 +40,7 @@ func _process(delta) -> void:
 		if flying_bird.position.x > 1200:
 			flying_bird.position.x = -200
 			canFly = false
-			flying_timer.wait_time = randf_range(4,10)
+			flying_timer.wait_time = randf_range(150,300)
 			flying_timer.start()
 			whichBird = randi_range(1,2)
 			
@@ -60,16 +60,16 @@ func _on_flap_timer_timeout() -> void:
 		1:
 			#BLUE BIRD
 			flying_bird.icon = BIRB_1
-			await get_tree().create_timer(randf_range(0.1,0.4)).timeout
+			await get_tree().create_timer(randf_range(0.1,0.2)).timeout
 			flying_bird.icon = BIRB_2
-			flap_timer.wait_time = randf_range(0.1,0.4)
+			flap_timer.wait_time = randf_range(0.1,0.2)
 			flap_timer.start()
 		2:
 			#YELLOWBIRD
 			flying_bird.icon = BIRD_ONE
-			await get_tree().create_timer(randf_range(0.1,0.4)).timeout
+			await get_tree().create_timer(randf_range(0.1,0.2)).timeout
 			flying_bird.icon = BIRD_TWO
-			flap_timer.wait_time = randf_range(0.1,0.4)
+			flap_timer.wait_time = randf_range(0.1,0.2)
 			flap_timer.start()
 
 	

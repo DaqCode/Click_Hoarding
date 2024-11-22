@@ -41,6 +41,8 @@ extends Control
 @onready var music: AudioStreamPlayer = $Music/Music1
 @onready var music2: AudioStreamPlayer = $Music/PauseMenu
 @onready var autoUpgrade: GPUParticles2D = %AutoUpgradePFX
+@onready var enemyIndicate: Sprite2D = $EnemyRandomSpawn/ClickMe
+
 
 var coin_count: int = 0
 var multiplier: float = 1.00
@@ -57,12 +59,13 @@ var clownAnimation = preload("res://resources/heat_button_example_3_out.ogv")
 var fishAnimation = preload("res://resources/heat_button_example_4_out.ogv")
 
 #Music Variables
-var MUSIC_1 = preload("res://resources/music/gameMusicforGameScene/music1.mp3")
-var MUSIC_2 = preload("res://resources/music/gameMusicforGameScene/music2.mp3")
-var MUSIC_3 = preload("res://resources/music/gameMusicforGameScene/music3.mp3")
-var MUSIC_4 = preload("res://resources/music/gameMusicforGameScene/coverless-book-lofi-186307.mp3")
-var MUSIC_5 = preload("res://resources/music/gameMusicforGameScene/lofi-chill-melancholic-259764.mp3")
-
+@onready var musicOptions = [ 
+	preload("res://resources/music/gameMusicforGameScene/music1.mp3"),
+	preload("res://resources/music/gameMusicforGameScene/music2.mp3"),
+	preload("res://resources/music/gameMusicforGameScene/music3.mp3"),
+	preload("res://resources/music/gameMusicforGameScene/coverless-book-lofi-186307.mp3"),
+	preload("res://resources/music/gameMusicforGameScene/lofi-chill-melancholic-259764.mp3")
+]
 #SFX variables
 var buttonClick = preload("res://resources/sfx/buttonClick.mp3")
 var clownClick = preload("res://resources/sfx/Clown Horn Sound Effect Lethal Company.mp3")
@@ -80,24 +83,16 @@ const MENU4 = preload("res://images/menuImage/menu_png_4_test_wtf.png")
 var multiplier_cap = 10.0 # Maximum multiplier growth cap
 var growth_rate = 5.0 # Determines how fast the multiplier tapers off
 
+# Variables for visible sprites for the arrows.
+var enemyIndicator = true
+var coinIndicator = true
+
 var isIdle: bool = true
 
 func _ready() -> void:
 
-	var randomMusic = randi_range(1,5)
-	match randomMusic:
-		1:
-			music.set_stream(MUSIC_1)
-		2:
-			music.set_stream(MUSIC_2)
-		3:
-			music.set_stream(MUSIC_3)
-		4:
-			music.set_stream(MUSIC_4)
-		5:
-			music.set_stream(MUSIC_5)
 	
-	music.playing = true
+	random_music()
 	goldenClickButton.disabled = true
 	
 	turretProgress.min_value = 0
@@ -109,15 +104,21 @@ func _ready() -> void:
 	
 	timeInt.text = "Click: %.1f" % 1.00
 	
-	goldenClick.wait_time = randf_range(30, 50)
+	goldenClick.wait_time = randf_range(30, 75)
 	goldenClick.start()
 	
-	enemy_spawn_timer.wait_time = randf_range(5, 6)
+	enemy_spawn_timer.wait_time = randf_range(45, 90)
 	enemy_spawn_timer.start()
 	enemy_random_spawn.disabled = true
 	health_bar.visible = false
 	
 	bite_text.visible = false
+
+	coin.text = "Coins: %s" % format_large_number(coin_count)
+
+func random_music() -> void:
+	music.set_stream(musicOptions.pick_random())
+	music.playing = true
 
 # Function to format large numbers with suffixes like "k" for thousands, "M" for millions, etc.
 func format_large_number(value: int) -> String:
@@ -166,37 +167,45 @@ func _on_more_click_pressed() -> void:
 
 # Clicking on the money generator
 func _on_button_pressed() -> void:
+	coin_count += round(1 * multiplier)
 	click_pef.emitting = true
 	isIdle = false
 	coin.text = "Coins: %s" % format_large_number(coin_count)
-	coin_count += round(1 * multiplier)
 
 	# Randomly select an animation, based on rarity I guess
 	var chance = randi() % 1000 + 1
 	buttonSFX.volume_db = -10
+	buttonSFX.pitch_scale = 1.0
 
 	if chance <= 1:
 		video_player.set_stream(fishAnimation)
 		video_player.z_index = 2
 		buttonSFX.set_stream(fishClick)
+		buttonSFX.pitch_scale = 1.0
 		
 	elif chance <= 5:
 		video_player.set_stream(clownAnimation)
 		buttonSFX.set_stream(clownClick)
 		buttonSFX.volume_db = 0
+		buttonSFX.pitch_scale = 1.0
 
 	elif chance <= 50:
 		video_player.set_stream(billyAnimation)
 		buttonSFX.set_stream(boopClick)
 		buttonSFX.volume_db = 0
+		buttonSFX.pitch_scale = 1.0
 
 	elif chance <= 60:
 		video_player.set_stream(staerieAnimation)
 		buttonSFX.set_stream(bonkClick)
+		buttonSFX.pitch_scale = 1.0
 
 	else:
 		video_player.set_stream(clickAnimation)
 		buttonSFX.set_stream(buttonClick)
+		buttonSFX.volume_db = randi_range(-20,-15)
+		buttonSFX.pitch_scale = randf_range(0.9, 1.15)
+
 
 	#Create the +1 effect appearing and leaving.
 	randomText.text = "+%.2f Coins" % (1 * multiplier)
@@ -323,6 +332,11 @@ func _process(_delta):
 	# Display the autoclick interval
 	timeInt.text = "Click: %.2f" % autoclick.wait_time
 
+
+	if enemyIndicator == false:
+		enemyIndicate.visible = false
+
+
 func _on_pause_pressed() -> void:
 	get_tree().paused = true
 	pausePanel.visible = true
@@ -394,47 +408,43 @@ func _on_golden_click_timeout() -> void:
 	goldenClickSFX.play()
 	await get_tree().create_timer(0.5).timeout
 	goldenClickDespawn.paused = false
-	goldenClickDespawn.wait_time = randf_range(2,4)
+	goldenClickDespawn.wait_time = randf_range(2,3)
 	goldenClickDespawn.start()
 	print("Golden YEAH CLICK %f" % goldenClickDespawn.wait_time)
 
 func _on_golden_click_pressed() -> void:
+	golden_click_pef.emitting = true
+	# goldenClickButton.position = Vector2(-200,0)
 	goldenClickDespawn.paused = true
-	goldenClickDespawn.wait_time = randf_range(2,4)
+	goldenClickDespawn.wait_time = randf_range(2,3)
 		
 	if  coin_count <= 1000:
 		coin_count += randi_range(750,900)
-		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count >= 1000:
 		coin_count += randi_range(5000,7500)
-		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count >= 10000:
 		coin_count += randi_range(10000,15000)
-		coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 	elif coin_count >= 100000:
 		coin_count += randi_range(33333,99999)
-		coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 	elif coin_count > 1000000:
 		coin_count += randi_range(5555555,9999000)
-		coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 	else:
 		coin_count += 100
-		coin.text = "Coins: %s" % format_large_number(coin_count)
-		
-	golden_click_pef.emitting = true
-	
+
+	coin.text = "Coins: %s" % format_large_number(coin_count)		
+	coinIndicator = false
 	goldenClickButton.disabled = true
 
 	goldenClickSFX.volume_db = -17.5
 	goldenClickSFX.pitch_scale = 1.2
 	goldenClickSFX.play()
 
-	goldenClick.wait_time = randf_range(10, 25)
+	goldenClick.wait_time = randf_range(20,40)
 	goldenClick.start()
 
 func _on_repair_click_pressed() -> void:
@@ -460,6 +470,7 @@ func _on_btmm_pressed() -> void:
 
 
 func _on_enemy_random_spawn_pressed():
+	enemyIndicator = false
 	enemy_random_spawn.position = Vector2(randf_range(300,700), randf_range(300, 400)) 
 	monster_hit.play()
 	pixel_blood.emitting = true
@@ -481,24 +492,20 @@ func _on_enemy_random_spawn_pressed():
 		
 		if coin_count <= 1000:
 			coin_count += randi_range(750,1250)
-			coin.text = "Coins: %s" % format_large_number(coin_count)
 	
 		elif coin_count >= 1000:
 			coin_count += randi_range(5000,8000)
-			coin.text = "Coins: %s" % format_large_number(coin_count)
 		
 		elif coin_count >= 10000:
 			coin_count += randi_range(9000,30000)
-			coin.text = "Coins: %s" % format_large_number(coin_count)
 			
 		elif coin_count >= 100000:
 			coin_count += randi_range(33333,99999)
-			coin.text = "Coins: %s" % format_large_number(coin_count)
 			
 		else:
 			coin_count += 1000
-			coin.text = "Coins: %s" % format_large_number(coin_count)
-		
+
+		coin.text = "Coins: %s" % format_large_number(coin_count)
 		monster_death.play()
 		monster_killed.play()
 		enemy_random_spawn.position = Vector2(-1000,320) 
@@ -582,18 +589,4 @@ func _on_enemy_bite_timeout() -> void:
 
 
 func _on_music_finished():
-	var randomMusic = randi_range(1,5)
-	
-	match randomMusic:
-		1:
-			music.set_stream(MUSIC_1)
-		2:
-			music.set_stream(MUSIC_2)
-		3:
-			music.set_stream(MUSIC_3)
-		4:
-			music.set_stream(MUSIC_4)
-		5:
-			music.set_stream(MUSIC_5)
-	
-	music.playing = true
+	random_music()	
