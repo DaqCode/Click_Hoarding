@@ -13,7 +13,7 @@ config_version=5
 config/name="AnotherProject"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://heat_icon.svg"
 
 [autoload]
 
